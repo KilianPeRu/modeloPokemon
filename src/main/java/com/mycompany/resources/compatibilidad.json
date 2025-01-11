@@ -1,0 +1,112 @@
+{
+  "tipos": {
+    "normal": {
+      "inmunidad": ["fantasma"],
+      "fortalezas": [],
+      "debilidades": ["lucha"],
+      "neutralidades": ["normal", "fuego", "agua", "electrico", "planta", "hielo", "veneno", "tierra", "volador", "psiquico", "bicho", "roca", "fantasma", "dragon", "siniestro", "acero", "hada"]
+    },
+    "fuego": {
+      "inmunidad": [],
+      "fortalezas": ["planta", "bicho", "hielo", "acero"],
+      "debilidades": ["agua", "roca", "tierra"],
+      "neutralidades": ["normal", "fuego", "electrico", "veneno", "volador", "psiquico", "fantasma", "dragon", "siniestro", "hada"]
+    },
+    "agua": {
+      "inmunidad": [],
+      "fortalezas": ["fuego", "tierra", "roca"],
+      "debilidades": ["planta", "electrico"],
+      "neutralidades": ["normal", "agua", "hielo", "bicho", "veneno", "volador", "psiquico", "fantasma", "dragon", "siniestro", "acero", "hada"]
+    },
+    "electrico": {
+      "inmunidad": [],
+      "fortalezas": ["agua", "volador"],
+      "debilidades": ["tierra"],
+      "neutralidades": ["normal", "fuego", "planta", "electrico", "hielo", "bicho", "roca", "veneno", "psiquico", "fantasma", "dragon", "siniestro", "acero", "hada"]
+    },
+    "planta": {
+      "inmunidad": [],
+      "fortalezas": ["agua", "tierra", "roca"],
+      "debilidades": ["fuego", "volador", "bicho", "veneno", "hielo"],
+      "neutralidades": ["normal", "planta", "electrico", "psiquico", "fantasma", "dragon", "siniestro", "acero", "hada"]
+    },
+    "hielo": {
+      "inmunidad": [],
+      "fortalezas": ["planta", "tierra", "volador", "dragon"],
+      "debilidades": ["fuego", "roca", "acero", "lucha"],
+      "neutralidades": ["normal", "agua", "electrico", "psiquico", "bicho", "veneno", "fantasma", "siniestro", "hada"]
+    },
+    "lucha": {
+      "inmunidad": ["fantasma"],
+      "fortalezas": ["normal", "roca", "hielo", "siniestro", "acero"],
+      "debilidades": ["volador", "psiquico", "hada"],
+      "neutralidades": ["fuego", "agua", "planta", "electrico", "bicho", "tierra", "fantasma", "dragon", "lucha"]
+    },
+    "veneno": {
+      "inmunidad": [],
+      "fortalezas": ["planta", "hada"],
+      "debilidades": ["tierra", "psiquico"],
+      "neutralidades": ["normal", "fuego", "agua", "electrico", "volador", "bicho", "roca", "fantasma", "dragon", "siniestro", "acero", "veneno"]
+    },
+    "tierra": {
+      "inmunidad": ["electrico"],
+      "fortalezas": ["fuego", "electrico", "roca", "acero", "veneno"],
+      "debilidades": ["agua", "planta", "hielo"],
+      "neutralidades": ["normal", "bicho", "volador", "psiquico", "dragon", "siniestro", "hada"]
+    },
+    "volador": {
+      "inmunidad": ["tierra"],
+      "fortalezas": ["planta", "lucha", "bicho"],
+      "debilidades": ["electrico", "hielo", "roca"],
+      "neutralidades": ["normal", "fuego", "agua", "volador", "psiquico", "veneno", "tierra", "fantasma", "dragon", "siniestro", "acero", "hada"]
+    },
+    "psiquico": {
+      "inmunidad": [],
+      "fortalezas": ["lucha", "veneno"],
+      "debilidades": ["bicho", "fantasma", "siniestro"],
+      "neutralidades": ["normal", "fuego", "agua", "planta", "electrico", "hielo", "volador", "psiquico", "roca", "tierra", "dragon", "acero", "hada"]
+    },
+    "bicho": {
+      "inmunidad": [],
+      "fortalezas": ["planta", "psiquico", "siniestro"],
+      "debilidades": ["fuego", "volador", "roca"],
+      "neutralidades": ["normal", "agua", "electrico", "hielo", "bicho", "veneno", "lucha", "tierra", "fantasma", "dragon", "acero", "hada"]
+    },
+    "roca": {
+      "inmunidad": [],
+      "fortalezas": ["fuego", "hielo", "volador", "bicho"],
+      "debilidades": ["agua", "planta", "lucha", "tierra", "acero"],
+      "neutralidades": ["normal", "electrico", "roca", "psiquico", "veneno", "fantasma", "dragon", "siniestro", "hada"]
+    },
+    "fantasma": {
+      "inmunidad": ["lucha","normal"],
+      "fortalezas": ["psiquico", "fantasma"],
+      "debilidades": ["fantasma", "siniestro"],
+      "neutralidades": ["normal", "fuego", "agua", "planta", "electrico", "hielo", "bicho", "roca", "lucha", "veneno", "volador", "dragon", "acero", "hada"]
+    },
+    "dragon": {
+      "inmunidad": [],
+      "fortalezas": ["dragon"],
+      "debilidades": ["hielo", "hada", "dragon"],
+      "neutralidades": ["normal", "fuego", "agua", "planta", "electrico", "bicho", "roca", "lucha", "psiquico", "veneno", "volador", "fantasma", "siniestro", "acero"]
+    },
+    "siniestro": {
+      "inmunidad": ["psiquico"],
+      "fortalezas": ["psiquico", "fantasma"],
+      "debilidades": ["lucha", "bicho", "hada"],
+      "neutralidades": ["normal", "fuego", "agua", "planta", "electrico", "hielo", "roca", "tierra", "volador", "veneno", "dragon", "siniestro", "acero"]
+    },
+    "acero": {
+      "inmunidad": [],
+      "fortalezas": ["hielo", "roca", "hada"],
+      "debilidades": ["fuego", "lucha", "tierra"],
+      "neutralidades": ["normal", "agua", "planta", "electrico", "bicho", "volador", "psiquico", "veneno", "fantasma", "dragon", "siniestro", "acero"]
+    },
+    "hada": {
+      "inmunidad": ["dragon"],
+      "fortalezas": ["lucha", "dragon", "siniestro"],
+      "debilidades": ["veneno", "acero"],
+      "neutralidades": ["normal", "fuego", "agua", "planta", "electrico", "hielo", "roca", "bicho", "psiquico", "tierra", "volador", "fantasma", "hada"]
+    }
+  }
+}
