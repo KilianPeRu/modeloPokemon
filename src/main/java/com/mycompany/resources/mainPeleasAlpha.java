@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class mainPeleasAlpha {
+public class mainPeleasAlpha extends JFrame {
     Pokemon p1;
     Pokemon p2;
     Pokemon p3;
@@ -22,17 +22,19 @@ public class mainPeleasAlpha {
     JProgressBar barrap1;
     JProgressBar barrap2;
 
-    public void main(String[] args) {
-        gameStart();
+    public static void main(String[] args) {
+        mainPeleasAlpha app = new mainPeleasAlpha();
+        app.gameStart();
 
         JFrame frame = new JFrame("Alpha Battle");
-        frame.add(initComponents());
+        frame.add(app.initComponents());
         frame.setVisible(true);
-        frame.setSize(700, 500);
+        frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
     }
-    public void gameStart(){
+
+    public void gameStart() {
         p1 = new Pokemon("111111A", "Charmander", "Charmander", "Fuego", "null", "Blaze", null,
                 39, 52, 43, 60, 50, 65);
         p2 = new Pokemon("111111A", "Bulbasaur", "Bulbasaur", "Planta", "Veneno", "Overgrwoth", null,
@@ -66,8 +68,14 @@ public class mainPeleasAlpha {
         Movimiento[] movep4 = new Movimiento[]{m4, m6, m1, m12};
         p4.setMovimientos(movep4);
 
-        teamUser = new ArrayList<>(){{add(p3);add(p2);}};
-        teamCPU = new ArrayList<>(){{add(p1);add(p4);}};
+        teamUser = new ArrayList<>() {{
+            add(p3);
+            add(p2);
+        }};
+        teamCPU = new ArrayList<>() {{
+            add(p1);
+            add(p4);
+        }};
         hpEquipo = baseHPTeam(teamUser);
         pActual = teamUser.get(0);
         pCPU = teamCPU.get(0);
@@ -254,21 +262,25 @@ public class mainPeleasAlpha {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (listaPokemon.get(indice).getHp() <= 0) {
-                        JOptionPane.showMessageDialog(null, listaPokemon.get(indice).getNombre() + " esta debilitado");
+                    if (listaPokemon.get(indice) == pActual) {
+                        JOptionPane.showMessageDialog(null, listaPokemon.get(indice).getNombre() + " esta en combate");
                     } else {
-                        Batalla bAux = new Batalla(pActual, pCPU);
-                        Movimiento m = bAux.calcularMejorOpcion(pCPU.getMovimientos());
-                        // Cambia el Pokémon actual
-                        pActual = listaPokemon.get(indice);
-                        barrap1.setMaximum(hpEquipo[indice]);
-                        barrap1.setValue(listaPokemon.get(indice).getHp());
-                        barrap1.setForeground(pActual.getColorType());
+                        if (listaPokemon.get(indice).getHp() <= 0) {
+                            JOptionPane.showMessageDialog(null, listaPokemon.get(indice).getNombre() + " esta debilitado");
+                        } else {
+                            Batalla bAux = new Batalla(pActual, pCPU);
+                            Movimiento m = bAux.calcularMejorOpcion(pCPU.getMovimientos());
+                            // Cambia el Pokémon actual
+                            pActual = listaPokemon.get(indice);
+                            barrap1.setMaximum(hpEquipo[indice]);
+                            barrap1.setValue(listaPokemon.get(indice).getHp());
+                            barrap1.setForeground(pActual.getColorType());
 
-                        repinta(panelPokemon, panelBotones);
+                            repinta(panelPokemon, panelBotones);
 
-                        reducirHP(barrap1, pActual, bAux.calculoDano(m, pCPU, pActual));
-                        comprobarVictoriaCPU(barrap1, teamUser, panelPokemon, panelBotones);
+                            reducirHP(barrap1, pActual, bAux.calculoDano(m, pCPU, pActual));
+                            comprobarVictoriaCPU(barrap1, teamUser, panelPokemon, panelBotones);
+                        }
                     }
                 }
             });

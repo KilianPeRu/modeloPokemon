@@ -22,11 +22,12 @@ public class pruebas {
     JProgressBar barrap1;
     JProgressBar barrap2;
 
-    public void main(String[] args) {
-        gameStart();
+    public static void main(String[] args) {
+        pruebas app = new pruebas();
+        app.gameStart();
 
         JFrame frame = new JFrame("Alpha Battle");
-        frame.add(initComponents());
+        frame.add(app.initComponents());
         frame.setVisible(true);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
