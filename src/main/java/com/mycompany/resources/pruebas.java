@@ -12,11 +12,6 @@ import java.util.ArrayList;
 public class pruebas {
     CargarEquipoRival crCPU = new CargarEquipoRival();
     CargarEquipoRival crUser = new CargarEquipoRival();
-    Pokemon p1;
-    Pokemon p2;
-    Pokemon p3;
-    Pokemon p4;
-
     private ArrayList<Pokemon> teamUser;
     private ArrayList<Pokemon> teamCPU;
     int[] hpEquipo;
@@ -129,6 +124,7 @@ public class pruebas {
         barraHP.setStringPainted(true);
         barraHP.setForeground(p.getColorType());
         barraHP.setBorder(new LineBorder(Color.BLACK, 2));
+        barraHP.setPreferredSize(new Dimension(300, barraHP.getPreferredSize().height));
         return barraHP;
     }
 

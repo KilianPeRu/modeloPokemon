@@ -35,16 +35,18 @@ public class Batalla {
         double rolls = 80 + rand.nextInt(21);
         int nivel = p1.getNivel();
         int ataque;
+        int defensa;
         if(m1.getClase().equals("Fisico")){
             ataque = p1.getAtq();
+            defensa = p2.getDef();
         }else{
             ataque = p1.getEat();
+            defensa = p2.getEdf();
         }
         int poder = m1.getPoder();
         if (poder == 0){
             return 0;
         }
-        int defensa = p2.getEdf();
         double danio = 0.01 * bonificacion * efectividad * rolls * ((((0.2 * nivel + 1) * ataque * poder) / (25 * defensa)) + 2);
 
         return (int) danio;
