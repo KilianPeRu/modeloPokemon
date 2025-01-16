@@ -5,10 +5,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class pruebas {
+    CargarEquipoRival crCPU = new CargarEquipoRival();
+    CargarEquipoRival crUser = new CargarEquipoRival();
     Pokemon p1;
     Pokemon p2;
     Pokemon p3;
@@ -22,7 +25,7 @@ public class pruebas {
     JProgressBar barrap1;
     JProgressBar barrap2;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         pruebas app = new pruebas();
         app.gameStart();
 
@@ -34,15 +37,15 @@ public class pruebas {
         frame.setLocationRelativeTo(null);
     }
 
-    public void gameStart() {
+    public void gameStart() throws SQLException, ClassNotFoundException {
         p1 = new Pokemon("111111A", "Charmander", "Charmander", "Fuego", "null", "Blaze", null,
-                39, 52, 43, 60, 50, 65);
+                39, 52, 43, 60, 50, 65,1,1,1,1);
         p2 = new Pokemon("111111A", "Bulbasaur", "Bulbasaur", "Planta", "Veneno", "Overgrwoth", null,
-                45, 49, 49, 65, 65, 45);
+                45, 49, 49, 65, 65, 45,1,1,1,1);
         p3 = new Pokemon("000001A", "Test1", "Azumarill", "Agua", "Hada",
-                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50);
+                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50,1,1,1,1);
         p4 = new Pokemon("0000001A", "Test3", "Primeape", "Lucha", "null",
-                "Irascible", "null", 100, 105, 60, 60, 70, 95);
+                "Irascible", "null", 100, 105, 60, 60, 70, 95,1,1,1,1);
         //Setteo de movimientos de Charmander
         Movimiento m1 = new Movimiento("Ascuas", 0, 40, 100, "Fuego", 40, "Especial");
         Movimiento m2 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
@@ -68,14 +71,12 @@ public class pruebas {
         Movimiento[] movep4 = new Movimiento[]{m4, m6, m1, m12};
         p4.setMovimientos(movep4);
 
-        teamUser = new ArrayList<>() {{
+        /*teamUser = new ArrayList<>() {{
             add(p3);
             add(p2);
-        }};
-        teamCPU = new ArrayList<>() {{
-            add(p1);
-            add(p4);
-        }};
+        }};*/
+        teamUser = crUser.cargarEquipo("betabot2");
+        teamCPU = crCPU.cargarEquipo("betabot1");
         hpEquipo = baseHPTeam(teamUser);
         pActual = teamUser.get(0);
         pCPU = teamCPU.get(0);

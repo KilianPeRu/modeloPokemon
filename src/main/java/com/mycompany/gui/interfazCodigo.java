@@ -1,4 +1,4 @@
-package com.mycompany.gui;
+/*package com.mycompany.gui;
 
 import com.mycompany.resources.Movimiento;
 import com.mycompany.resources.Pokemon;
@@ -157,3 +157,4 @@ public class interfazCodigo {
         return panel;
     }
 }
+*/

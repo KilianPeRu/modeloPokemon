@@ -36,13 +36,13 @@ public class mainPeleasAlpha extends JFrame {
 
     public void gameStart() {
         p1 = new Pokemon("111111A", "Charmander", "Charmander", "Fuego", "null", "Blaze", null,
-                39, 52, 43, 60, 50, 65);
+                39, 52, 43, 60, 50, 65,1,1,1,1);
         p2 = new Pokemon("111111A", "Bulbasaur", "Bulbasaur", "Planta", "Veneno", "Overgrwoth", null,
-                45, 49, 49, 65, 65, 45);
+                45, 49, 49, 65, 65, 45,1,1,1,1);
         p3 = new Pokemon("000001A", "Test1", "Azumarill", "Agua", "Hada",
-                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50);
+                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50,1,1,1,1);
         p4 = new Pokemon("0000001A", "Test3", "Primeape", "Lucha", "null",
-                "Irascible", "null", 100, 105, 60, 60, 70, 95);
+                "Irascible", "null", 100, 105, 60, 60, 70, 95,1,1,1,1);
         //Setteo de movimientos de Charmander
         Movimiento m1 = new Movimiento("Ascuas", 0, 40, 100, "Fuego", 40, "Especial");
         Movimiento m2 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");

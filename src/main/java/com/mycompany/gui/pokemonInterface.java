@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  * @author exosh
  */
 public class pokemonInterface extends JFrame {
-    Pokemon p1 = new Pokemon("0000001A", "Test1","Azumarill","Agua","Hada","Fuerza Bruta","Cinta Eleccion",100,50,80,60,80,50);
-    Pokemon p2 = new Pokemon("0000001A", "Test2","Hydreigon","Siniestro","Dragon","Levitacion","Gafas Eleccion",92,105,90,125,90,98);
-    Pokemon p3 = new Pokemon("0000001A", "Test3","Primeape","Lucha",null,"Irascible",null,65,105,60,60,70,95);
+    Pokemon p1 = new Pokemon("0000001A", "Test1","Azumarill","Agua","Hada","Fuerza Bruta","Cinta Eleccion",100,50,80,60,80,50,1,1,1,1);
+    Pokemon p2 = new Pokemon("0000001A", "Test2","Hydreigon","Siniestro","Dragon","Levitacion","Gafas Eleccion",92,105,90,125,90,98,1,1,1,1);
+    Pokemon p3 = new Pokemon("0000001A", "Test3","Primeape","Lucha",null,"Irascible",null,65,105,60,60,70,95,1,1,1,1);
     Pokemon[] list = {p1,p2,p3,null,null,null};
     ArrayList<Pokemon> listPokemon = savePokemon(list);
 
