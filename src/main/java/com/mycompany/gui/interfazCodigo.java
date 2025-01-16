@@ -1,317 +1,164 @@
-package com.mycompany.resources;
+package com.mycompany.gui;
+
+import com.mycompany.resources.CargarEquipoRival;
+import com.mycompany.resources.Movimiento;
+import com.mycompany.resources.Pokemon;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+public class interfazCodigo {
+    static CargarEquipoRival c = new CargarEquipoRival();
+    static ArrayList<Pokemon> equipo;
 
-public class interfazCodigo extends JFrame {
-    CargarEquipoRival crCPU = new CargarEquipoRival();
-    CargarEquipoRival crUser = new CargarEquipoRival();
-    Pokemon p1;
-    Pokemon p2;
-    Pokemon p3;
-    Pokemon p4;
-
-    private ArrayList<Pokemon> teamUser;
-    private ArrayList<Pokemon> teamCPU;
-    int[] hpEquipo;
-    Pokemon pActual;
-    Pokemon pCPU;
-    JProgressBar barrap1;
-    JProgressBar barrap2;
+    public interfazCodigo() throws SQLException, ClassNotFoundException {
+    }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        pruebas app = new pruebas();
-        app.gameStart();
-
-        JFrame frame = new JFrame("Alpha Battle");
-        frame.add(app.initComponents());
-        frame.setVisible(true);
-        frame.setSize(800, 600);
+        equipo = c.cargarEquipo("betabot1");
+        JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Pokemons");
+        frame.add(createSwitchBattlePanel());
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
-
-    public void gameStart() throws SQLException, ClassNotFoundException {
-        p1 = new Pokemon("111111A", "Charmander", "Charmander", "Fuego", "null", "Blaze", null,
-                39, 52, 43, 60, 50, 65,1,1,1,1);
-        p2 = new Pokemon("111111A", "Bulbasaur", "Bulbasaur", "Planta", "Veneno", "Overgrwoth", null,
-                45, 49, 49, 65, 65, 45,1,1,1,1);
-        p3 = new Pokemon("000001A", "Test1", "Azumarill", "Agua", "Hada",
-                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50,1,1,1,1);
-        p4 = new Pokemon("0000001A", "Test3", "Primeape", "Lucha", "null",
-                "Irascible", "null", 100, 105, 60, 60, 70, 95,1,1,1,1);
-        //Setteo de movimientos de Charmander
-        Movimiento m1 = new Movimiento("Ascuas", 0, 40, 100, "Fuego", 40, "Especial");
-        Movimiento m2 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m3 = new Movimiento("Lanzallamas", 0, 80, 100, "Fuego", 40, "");
-        Movimiento m4 = new Movimiento("Ataque Rapido", 1, 40, 100, "Normal", 40, "Fisico");
-        Movimiento[] movep1 = new Movimiento[]{m1, m2, m3, m4};
-        p1.setMovimientos(movep1);
-        //Setteo de movimientos de Bulbasaur
-        Movimiento m5 = new Movimiento("Absorber", 0, 40, 100, "Planta", 40, "Especial");
-        Movimiento m6 = new Movimiento("Follaje", 0, 40, 100, "Planta", 40, "Fisico");
-        Movimiento m7 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m8 = new Movimiento("Ácido", 0, 40, 100, "Veneno", 40, "Especial");
-        Movimiento[] movep2 = new Movimiento[]{m5, m6, m7, m8};
-        p2.setMovimientos(movep2);
-
-        Movimiento m9 = new Movimiento("Burbuja", 0, 40, 100, "Agua", 40, "Especial");
-        Movimiento m10 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m11 = new Movimiento("Viento Feerico", 0, 40, 100, "Hada", 40, "Especial");
-        Movimiento m12 = new Movimiento("Picotazo", 0, 40, 100, "Volador", 40, "Fisico");
-        Movimiento[] movep3 = new Movimiento[]{m9, m10, m11, m12};
-        p3.setMovimientos(movep3);
-
-        Movimiento[] movep4 = new Movimiento[]{m4, m6, m1, m12};
-        p4.setMovimientos(movep4);
-
-        /*teamUser = new ArrayList<>() {{
-            add(p3);
-            add(p2);
-        }};*/
-        teamUser = crUser.cargarEquipo("betabot2");
-        teamCPU = crCPU.cargarEquipo("betabot1");
-        hpEquipo = baseHPTeam(teamUser);
-        pActual = teamUser.get(0);
-        pCPU = teamCPU.get(0);
-        barrap1 = createBarraHP(pActual);
-        barrap2 = createBarraHP(pCPU);
-    }
-
-    public JPanel initComponents() {
+    public static JPanel createSwitchBattlePanel(){
         JPanel panel = new JPanel(new BorderLayout());
+        panel.add(createTop(equipo.get(0)), BorderLayout.NORTH);
+        panel.add(createWest(equipo), BorderLayout.WEST);
+        panel.add(createCenter(equipo.get(0)), BorderLayout.CENTER);
+        panel.add(createBottom(), BorderLayout.SOUTH);
+        return panel;
+    }
 
-        // Panel central que muestra los Pokémon
-        JPanel panelPokemon = new JPanel(new BorderLayout());
+    public static JPanel createTop(Pokemon pokemonSelected){
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel nombre = new JLabel(pokemonSelected.getNombre());
+        JLabel nivelPokemon = new JLabel("LV. " + String.valueOf(pokemonSelected.getNivel()));
+        panel.add(nombre, BorderLayout.WEST);
+        panel.add(nivelPokemon, BorderLayout.EAST);
+        panel.setVisible(true);
+        return panel;
+    }
 
-        JPanel panelPokemonUser = createPokemon(pActual, barrap1);
-        JPanel panelPokemonCPU = createPokemon(pCPU, barrap2);
+    public static JPanel createCenter(Pokemon pokemonSelected){
+        JPanel panel = new JPanel(new GridLayout(0,3));
 
-        panelPokemon.add(panelPokemonUser, BorderLayout.WEST);
-        panelPokemon.add(panelPokemonCPU, BorderLayout.EAST);
+        //CREACION DE LA PARTE IZQUIERDA
+        panel.add(createCenterLeft(pokemonSelected));
 
-        // Panel inferior para los botones de movimientos
-        JPanel panelBotones = createAttackButton(pActual.getMovimientos(), panelPokemon);
+        // CREACION DE LA PARTE CENTRAL
+        panel.add(createDatos(pokemonSelected));
 
-        // Agrega el equipo del usuario y otros paneles
-        panel.add(createTeam(teamUser, panelPokemon, panelBotones), BorderLayout.WEST);
-        panel.add(panelPokemon, BorderLayout.CENTER);
-        panel.add(panelBotones, BorderLayout.SOUTH);
+        //CREACION PARTE DERECHA
+        JPanel estadisticas = createStats(pokemonSelected);
+        panel.add(estadisticas);
 
         return panel;
     }
 
+    public static JPanel createWest(ArrayList<Pokemon> equipo){
+        JPanel panel = new JPanel(new GridLayout(equipo.size(), 1));
+        for (int i = 0; i < equipo.size(); i++) {
+            JButton button = new JButton();
+            button.setOpaque(true);
+            String imagenPokemon = equipo.get(i).getEspecie().toLowerCase()+".png";
+            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            ImageIcon icon = new ImageIcon(path);
+            Icon image = new ImageIcon(icon.getImage().getScaledInstance(100,100, java.awt.Image.SCALE_SMOOTH));
+            button.setIcon(image);
+        }
+        return panel;
+    }
 
-    public JPanel createAttackButton(Movimiento[] moves, JPanel panelPokemon) {
-        Batalla battle = new Batalla(pActual, pCPU);
-        JPanel panel = new JPanel();
+    public static JPanel createBottom(){
+        JPanel panel = new JPanel(new FlowLayout());
+
+        JButton btnSwitch = new JButton("Switch");
+        btnSwitch.setBackground(new Color(78, 253, 82));
+        panel.add(btnSwitch);
+
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.setBackground(new Color(253, 78, 78));
+        panel.add(btnCancel);
+
+        return panel;
+    }
+
+    public static JPanel createCenterLeft(Pokemon pokemonSelected){
+        JPanel panel = new JPanel(new GridLayout(2,1));
+
+        JPanel aux = new JPanel(new FlowLayout());
+        JButton objeto = new JButton();
+        objeto.setOpaque(true);
+        if(pokemonSelected.getObjeto() != null){
+            String imagenObjeto = pokemonSelected.getObjeto().toLowerCase().replace(" ", "")+".png";
+            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            ImageIcon iconObjeto = new ImageIcon(path2);
+            objeto.setIcon(iconObjeto);
+            aux.add(objeto, FlowLayout.RIGHT);
+        }
+        panel.add(aux);
+
+        JLabel pokemonImage = new JLabel();
+        String imagenPokemon = pokemonSelected.getEspecie().toLowerCase()+".png";
+        String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+        ImageIcon iconPokemon = new ImageIcon(path);
+        Icon image = new ImageIcon(iconPokemon.getImage().getScaledInstance(panel.getWidth()-20, panel.getHeight()-aux.getHeight()-20, java.awt.Image.SCALE_SMOOTH));
+        pokemonImage.setIcon(image);
+        panel.add(pokemonImage);
+
+        return panel;
+    }
+
+    public static JPanel createDatos(Pokemon pokemonSelected){
+        JPanel panel = new JPanel(new GridLayout(0,1));
+        JPanel tipos = new JPanel(new FlowLayout());
+        JLabel nombre = new JLabel(pokemonSelected.getNombre());
+        JLabel idTrainer = new JLabel(pokemonSelected.getIdTrainer());
+
+        JLabel tipo1 = new JLabel(pokemonSelected.getTipo1());
+        JLabel tipo2 = new JLabel(pokemonSelected.getTipo2());
+        tipos.add(tipo1);
+        tipos.add(tipo2);
+
+        JPanel movimientos = createMoves(pokemonSelected.getMovimientos());
+
+        panel.add(nombre);
+        panel.add(idTrainer);
+        panel.add(movimientos);
+        return panel;
+    }
+
+    public static JPanel createMoves(Movimiento[] moves){
+        JPanel panel = new JPanel(new GridLayout(4, 1));
         for (int i = 0; i < moves.length; i++) {
-            int indice = i;
-            JButton ataque = new JButton(moves[i].getNombre());
-            ataque.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Movimiento movimientoCPU = battle.calcularMejorOpcion(pCPU.getMovimientos());
-                    int orden = battle.ordenAtaques(moves[indice], movimientoCPU);
-                    if (orden == 1) {
-                        reducirHP(barrap2, pCPU, battle.calculoDano(moves[indice], pActual, pCPU));
-                        if (!comprobarVictoriaJugador(barrap2, teamCPU, panelPokemon, barrap2)) {
-                            reducirHP(barrap1, pActual, battle.calculoDano(movimientoCPU, pCPU, pActual));
-                            comprobarVictoriaCPU(barrap1, teamUser, panelPokemon, panel);
-                        }
-                    } else {
-                        reducirHP(barrap1, pActual, battle.calculoDano(movimientoCPU, pCPU, pActual));
-                        if (!comprobarVictoriaCPU(barrap1, teamUser, panelPokemon, panel)) {
-                            reducirHP(barrap2, pCPU, battle.calculoDano(moves[indice], pActual, pCPU));
-                            comprobarVictoriaJugador(barrap2, teamCPU, panelPokemon, barrap2);
-                        }
-                    }
-                }
-            });
-            panel.add(ataque);
-        }
-        return panel;
-    }
-
-    public JPanel createPokemon(Pokemon p, JProgressBar barraHP) {
-        JPanel panelPokemon = new JPanel(new BorderLayout());
-
-        JLabel label = new JLabel(p.getNombre());
-
-        JLabel imagen = new JLabel();
-        ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/" + p.getEspecie().toLowerCase() + ".png");
-        imagen.setIcon(icon);
-
-        panelPokemon.add(label, BorderLayout.NORTH);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-
-        panelPokemon.add(imagen, BorderLayout.CENTER);
-        imagen.setHorizontalAlignment(SwingConstants.CENTER);
-
-        panelPokemon.add(barraHP, BorderLayout.SOUTH);
-
-        return panelPokemon;
-    }
-
-    public JProgressBar createBarraHP(Pokemon p) {
-        JProgressBar barraHP = new JProgressBar(0, p.getHp());
-        barraHP.setValue(p.getHp());
-        barraHP.setMaximum(p.getHp());
-        barraHP.setStringPainted(true);
-        barraHP.setForeground(p.getColorType());
-        barraHP.setBorder(new LineBorder(Color.BLACK, 2));
-        return barraHP;
-    }
-
-    public void reducirHP(JProgressBar barra, Pokemon p, int cantidad) {
-        p.setHp(p.getHp() - cantidad);
-        barra.setValue(p.getHp());
-    }
-
-    public int calculoHP(Pokemon p) {
-        return (int) (((double) (2 * p.getHp()) / 100) * 50 + 50 + 10);
-    }
-
-    public boolean comprobarVictoriaJugador(JProgressBar barra, ArrayList<Pokemon> equipoCPU, JPanel panelPokemon,
-                                            JProgressBar barrap2) {
-        if (barra.getValue() <= 0) {
-            boolean reemplazado = false;
-            for (int i = 0; i < equipoCPU.size(); i++) {
-                if (equipoCPU.get(i).getHp() > 0) {
-                    pCPU = equipoCPU.get(i); // Cambia al nuevo Pokémon del CPU
-                    barrap2.setMaximum(equipoCPU.get(i).getHp());
-                    barrap2.setValue(equipoCPU.get(i).getHp());
-                    barrap2.setForeground(pCPU.getColorType());
-                    // Actualiza el panel del Pokémon actual
-                    panelPokemon.removeAll();
-                    panelPokemon.add(createPokemon(pActual, barrap1), BorderLayout.WEST);
-                    panelPokemon.add(createPokemon(pCPU, barrap2), BorderLayout.EAST);
-                    panelPokemon.revalidate();
-                    panelPokemon.repaint();
-                    reemplazado = true;
-                    break;
-                }
-            }
-            if (!reemplazado) {
-                int option = JOptionPane.showOptionDialog(null, "¡Has ganado la batalla! Todos los Pokémon del CPU han sido debilitados.",
-                        "FIN", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                        new Object[]{"OK"}, "OK"
-                );
-
-                if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                    System.exit(1);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-
-    public boolean comprobarVictoriaCPU(JProgressBar barra, ArrayList<Pokemon> equipoUser, JPanel panelPokemon, JPanel panelBotones) {
-        if (barra.getValue() <= 0) {
-            // Filtra los Pokémon vivos
-            ArrayList<Pokemon> pokemonVivos = new ArrayList<>();
-            for (Pokemon pokemon : equipoUser) {
-                if (pokemon.getHp() > 0) {
-                    pokemonVivos.add(pokemon);
-                }
-            }
-
-            if (pokemonVivos.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "¡El CPU ha ganado la batalla! Todos tus Pokémon han sido debilitados.",
-                        "FIN", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
-            }
-
-            String[] opcionesPokemon = pokemonVivos.stream().map(Pokemon::getNombre).toArray(String[]::new);
-            int seleccion = JOptionPane.showOptionDialog(null, "Elige tu siguiente Pokémon",
-                    "Cambio de Pokémon", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                    null, opcionesPokemon, opcionesPokemon[0]);
-
-            while (seleccion < 0) {
-                seleccion = JOptionPane.showOptionDialog(null, "Tienes que elegir un Pokemon",
-                        "Cambio de Pokémon", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                        null, opcionesPokemon, opcionesPokemon[0]);
-            }
-
-            Pokemon seleccionado = pokemonVivos.get(seleccion);
-            pActual = seleccionado;
-            repinta(panelPokemon, panelBotones);
-
-            int indiceSeleccionado = equipoUser.indexOf(seleccionado);
-            barra.setMaximum(hpEquipo[indiceSeleccionado]);
-            barra.setValue(seleccionado.getHp());
-            barra.setForeground(pActual.getColorType());
-            return true;
-        }
-        return false;
-    }
-
-
-    private JPanel createTeam(ArrayList<Pokemon> listaPokemon, JPanel panelPokemon, JPanel panelBotones) {
-        JPanel panel = new JPanel(new GridLayout(listaPokemon.size(), 1));
-        for (int i = 0; i < listaPokemon.size(); i++) {
-            JButton button = new JButton(listaPokemon.get(i).getNombre());
-            int indice = i;
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (listaPokemon.get(indice) == pActual) {
-                        JOptionPane.showMessageDialog(null, listaPokemon.get(indice).getNombre() + " esta en combate");
-                    } else {
-                        if (listaPokemon.get(indice).getHp() <= 0) {
-                            JOptionPane.showMessageDialog(null, listaPokemon.get(indice).getNombre() + " esta debilitado");
-                        } else {
-                            Batalla bAux = new Batalla(pActual, pCPU);
-                            Movimiento m = bAux.calcularMejorOpcion(pCPU.getMovimientos());
-                            // Cambia el Pokémon actual
-                            pActual = listaPokemon.get(indice);
-                            barrap1.setMaximum(hpEquipo[indice]);
-                            barrap1.setValue(listaPokemon.get(indice).getHp());
-                            barrap1.setForeground(pActual.getColorType());
-
-                            repinta(panelPokemon, panelBotones);
-
-                            reducirHP(barrap1, pActual, bAux.calculoDano(m, pCPU, pActual));
-                            comprobarVictoriaCPU(barrap1, teamUser, panelPokemon, panelBotones);
-                        }
-                    }
-                }
-            });
+            JButton button = new JButton(moves[i].getNombre());
+            button.setOpaque(true);
             panel.add(button);
         }
         return panel;
     }
+    public static JPanel createStats(Pokemon pokemon){
+        JPanel panel = new JPanel(new FlowLayout());
 
-    public int[] baseHPTeam(ArrayList<Pokemon> listaPokemon) {
-        int[] baseHP = new int[listaPokemon.size()];
-        for (int i = 0; i < listaPokemon.size(); i++) {
-            baseHP[i] = calculoHP(listaPokemon.get(i));
-            listaPokemon.get(i).setHp(baseHP[i]);
-        }
-        return baseHP;
-    }
+        JLabel hp = new JLabel(String.valueOf(pokemon.getHp()));
+        JLabel ataque = new JLabel(String.valueOf(pokemon.getAtq()));
+        JLabel defensa = new JLabel(String.valueOf(pokemon.getDef()));
+        JLabel ataqueEspecial = new JLabel(String.valueOf(pokemon.getEat()));
+        JLabel defensaEspecial = new JLabel(String.valueOf(pokemon.getEdf()));
+        JLabel velocidad = new JLabel(String.valueOf(pokemon.getVel()));
 
-    public void repinta(JPanel panelPokemon, JPanel panelBotones) {
-        // Actualiza el panel
-        panelPokemon.removeAll();
-        panelPokemon.add(createPokemon(pActual, barrap1), BorderLayout.WEST);
-        panelPokemon.add(createPokemon(pCPU, barrap2), BorderLayout.EAST);
-        panelPokemon.revalidate();
-        panelPokemon.repaint();
-        // Actualiza los botones de ataque
-        panelBotones.removeAll();
-        JPanel nuevosBotones = createAttackButton(pActual.getMovimientos(), panelPokemon);
-        panelBotones.add(nuevosBotones);
-        panelBotones.revalidate();
-        panelBotones.repaint();
+        panel.add(hp);
+        panel.add(ataque);
+        panel.add(defensa);
+        panel.add(ataqueEspecial);
+        panel.add(defensaEspecial);
+        panel.add(velocidad);
+
+        return panel;
     }
 }
-

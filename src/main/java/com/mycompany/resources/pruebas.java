@@ -38,43 +38,6 @@ public class pruebas {
     }
 
     public void gameStart() throws SQLException, ClassNotFoundException {
-        p1 = new Pokemon("111111A", "Charmander", "Charmander", "Fuego", "null", "Blaze", null,
-                39, 52, 43, 60, 50, 65,1,1,1,1);
-        p2 = new Pokemon("111111A", "Bulbasaur", "Bulbasaur", "Planta", "Veneno", "Overgrwoth", null,
-                45, 49, 49, 65, 65, 45,1,1,1,1);
-        p3 = new Pokemon("000001A", "Test1", "Azumarill", "Agua", "Hada",
-                "Fuerza Bruta", "Cinta Eleccion", 100, 50, 80, 60, 80, 50,1,1,1,1);
-        p4 = new Pokemon("0000001A", "Test3", "Primeape", "Lucha", "null",
-                "Irascible", "null", 100, 105, 60, 60, 70, 95,1,1,1,1);
-        //Setteo de movimientos de Charmander
-        Movimiento m1 = new Movimiento("Ascuas", 0, 40, 100, "Fuego", 40, "Especial");
-        Movimiento m2 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m3 = new Movimiento("Lanzallamas", 0, 80, 100, "Fuego", 40, "");
-        Movimiento m4 = new Movimiento("Ataque Rapido", 1, 40, 100, "Normal", 40, "Fisico");
-        Movimiento[] movep1 = new Movimiento[]{m1, m2, m3, m4};
-        p1.setMovimientos(movep1);
-        //Setteo de movimientos de Bulbasaur
-        Movimiento m5 = new Movimiento("Absorber", 0, 40, 100, "Planta", 40, "Especial");
-        Movimiento m6 = new Movimiento("Follaje", 0, 40, 100, "Planta", 40, "Fisico");
-        Movimiento m7 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m8 = new Movimiento("Ácido", 0, 40, 100, "Veneno", 40, "Especial");
-        Movimiento[] movep2 = new Movimiento[]{m5, m6, m7, m8};
-        p2.setMovimientos(movep2);
-
-        Movimiento m9 = new Movimiento("Burbuja", 0, 40, 100, "Agua", 40, "Especial");
-        Movimiento m10 = new Movimiento("Placaje", 0, 40, 100, "Normal", 40, "Fisico");
-        Movimiento m11 = new Movimiento("Viento Feerico", 0, 40, 100, "Hada", 40, "Especial");
-        Movimiento m12 = new Movimiento("Picotazo", 0, 40, 100, "Volador", 40, "Fisico");
-        Movimiento[] movep3 = new Movimiento[]{m9, m10, m11, m12};
-        p3.setMovimientos(movep3);
-
-        Movimiento[] movep4 = new Movimiento[]{m4, m6, m1, m12};
-        p4.setMovimientos(movep4);
-
-        /*teamUser = new ArrayList<>() {{
-            add(p3);
-            add(p2);
-        }};*/
         teamUser = crUser.cargarEquipo("betabot2");
         teamCPU = crCPU.cargarEquipo("betabot1");
         hpEquipo = baseHPTeam(teamUser);
