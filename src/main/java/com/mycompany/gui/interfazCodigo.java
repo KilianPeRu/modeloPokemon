@@ -17,7 +17,7 @@ public class interfazCodigo {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        equipo = c.cargarEquipo("betabot1");
+        equipo = c.cargarEquipo("betabot3");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Pokemons");

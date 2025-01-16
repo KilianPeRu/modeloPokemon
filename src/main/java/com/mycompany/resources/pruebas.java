@@ -33,7 +33,7 @@ public class pruebas {
     }
 
     public void gameStart() throws SQLException, ClassNotFoundException {
-        teamUser = crUser.cargarEquipo("betabot2");
+        teamUser = crUser.cargarEquipo("betabot3");
         teamCPU = crCPU.cargarEquipo("betabot1");
         hpEquipo = baseHPTeam(teamUser);
         pActual = teamUser.get(0);
@@ -104,7 +104,8 @@ public class pruebas {
 
         JLabel imagen = new JLabel();
         ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/" + p.getEspecie().toLowerCase() + ".png");
-        imagen.setIcon(icon);
+        Icon image = new ImageIcon(icon.getImage().getScaledInstance(200,230,Image.SCALE_SMOOTH));
+        imagen.setIcon(image);
 
         panelPokemon.add(label, BorderLayout.NORTH);
         label.setHorizontalAlignment(SwingConstants.CENTER);

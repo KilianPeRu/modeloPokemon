@@ -30,26 +30,30 @@ public class Batalla {
     }
 
     public static int calculoDano(Movimiento m1, Pokemon p1, Pokemon p2) {
-        double bonificacion = calculoBonificacion(m1.getTipo(), p1);
-        double efectividad = cp.calcularEfectividad(m1.getTipo(), p2.getTipo1().toLowerCase(), p2.getTipo2().toLowerCase());
-        double rolls = 80 + rand.nextInt(21);
-        int nivel = p1.getNivel();
-        int ataque;
-        int defensa;
-        if(m1.getClase().equals("Fisico")){
-            ataque = p1.getAtq();
-            defensa = p2.getDef();
+        int acierto = rand.nextInt(100)+1;
+        if(acierto <= m1.getPrecision()){
+            double bonificacion = calculoBonificacion(m1.getTipo(), p1);
+            double efectividad = cp.calcularEfectividad(m1.getTipo(), p2.getTipo1().toLowerCase(), p2.getTipo2().toLowerCase());
+            double rolls = 80 + rand.nextInt(21);
+            int nivel = p1.getNivel();
+            int ataque;
+            int defensa;
+            if(m1.getClase().equals("Fisico")){
+                ataque = p1.getAtq();
+                defensa = p2.getDef();
+            }else{
+                ataque = p1.getEat();
+                defensa = p2.getEdf();
+            }
+            int poder = m1.getPoder();
+            if (poder == 0){
+                return 0;
+            }
+            double danio = 0.01 * bonificacion * efectividad * rolls * ((((0.2 * nivel + 1) * ataque * poder) / (25 * defensa)) + 2);
+            return (int) danio;
         }else{
-            ataque = p1.getEat();
-            defensa = p2.getEdf();
-        }
-        int poder = m1.getPoder();
-        if (poder == 0){
             return 0;
         }
-        double danio = 0.01 * bonificacion * efectividad * rolls * ((((0.2 * nivel + 1) * ataque * poder) / (25 * defensa)) + 2);
-
-        return (int) danio;
     }
 
     public static double calculoBonificacion(String tipoAtaque, Pokemon p1) {
