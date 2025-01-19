@@ -7,10 +7,10 @@ Javamon;
 CREATE TABLE users
 (
     idUsuario integer auto_increment primary key,
-    `name`    varchar(20) not null,
-    passwd    varchar(18) not null,
-    state     char(1)     not null default '1',
-    money     int                  default 0,
+    `name`    varchar(20) unique not null,
+    passwd    varchar(18)        not null,
+    state     char(1)            not null default '1',
+    money     int                         default 0,
     ip        varchar(255)
 );
 
