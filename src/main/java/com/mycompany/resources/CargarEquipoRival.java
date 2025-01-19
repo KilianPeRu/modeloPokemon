@@ -26,6 +26,7 @@ public class CargarEquipoRival {
         String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "'";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
+        System.out.println("Cargando equipo de " + usuarioEquipo + ":");
         while (rs.next()) {
             int idPokemon = rs.getInt("idPokemon");
             String nombreTrainer = rs.getString("trainerName");
@@ -47,7 +48,7 @@ public class CargarEquipoRival {
             int m3 = rs.getInt("move3");
             int m4 = rs.getInt("move4");
             Pokemon p = new Pokemon(nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
-            System.out.println(p.toString());
+            System.out.println(p.getNombre()+"\n-----------------------");
             p.setMovimientos(cargarMovimiento(p));
             for (Movimiento m : p.getMovimientos()) {
                 System.out.println(m.getNombre());
