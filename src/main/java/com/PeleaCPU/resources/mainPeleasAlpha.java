@@ -1,4 +1,4 @@
-package com.mycompany.resources;
+package com.PeleaCPU.resources;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

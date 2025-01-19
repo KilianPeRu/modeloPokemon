@@ -1,4 +1,4 @@
-package com.mycompany.resources;
+package com.PeleaCPU.resources;
 
 import java.sql.*;
 import java.util.ArrayList;

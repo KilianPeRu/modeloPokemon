@@ -1,8 +1,8 @@
-package com.mycompany.gui;
+package com.PeleaCPU.gui;
 
-import com.mycompany.resources.CargarEquipoRival;
-import com.mycompany.resources.Movimiento;
-import com.mycompany.resources.Pokemon;
+import com.PeleaCPU.resources.CargarEquipoRival;
+import com.PeleaCPU.resources.Movimiento;
+import com.PeleaCPU.resources.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
