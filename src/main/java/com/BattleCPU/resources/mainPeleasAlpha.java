@@ -1,4 +1,4 @@
-package com.PeleaCPU.resources;
+package com.BattleCPU.resources;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class pruebas {
+public class mainPeleasAlpha {
     // Iniciando variables necesarias para la aplicacion
     CargarEquipoRival crCPU = new CargarEquipoRival(); // Recurso de carga para equipo de la CPU
     CargarEquipoRival crUser = new CargarEquipoRival(); // Recurso de carga de nuestro Equipo
@@ -115,7 +115,7 @@ public class pruebas {
 
         //Crea la imagen y la pone
         JLabel imagen = new JLabel();
-        ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/" + p.getEspecie().toLowerCase() + ".png");
+        ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + p.getEspecie().toLowerCase() + ".png");
         Icon image = new ImageIcon(icon.getImage().getScaledInstance(200,230,Image.SCALE_SMOOTH));
         imagen.setIcon(image);
 

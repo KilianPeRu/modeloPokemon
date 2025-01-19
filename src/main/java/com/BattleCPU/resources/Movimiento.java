@@ -1,4 +1,4 @@
-package com.PeleaCPU.resources;
+package com.BattleCPU.resources;
 
 public class Movimiento {
     String Nombre;

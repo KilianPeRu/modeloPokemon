@@ -1,4 +1,4 @@
-package com.PeleaCPU.resources;
+package com.BattleCPU.resources;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class CompatibilidadPokemon {
     // Carga la compatibilidad desde el archivo JSON
-    static JSONObject compatibilidad = cargarCompatibilidad("src/main/java/com/mycompany/resources/compatibilidad.json");
+    static JSONObject compatibilidad = cargarCompatibilidad("src/main/java/com/BattleCPU/resources/compatibilidad.json");
 
     // Método para cargar la compatibilidad desde un archivo JSON
     public static JSONObject cargarCompatibilidad(String archivo) {

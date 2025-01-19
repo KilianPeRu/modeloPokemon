@@ -1,8 +1,8 @@
-package com.PeleaCPU.gui;
+package com.BattleCPU.gui;
 
-import com.PeleaCPU.resources.CargarEquipoRival;
-import com.PeleaCPU.resources.Movimiento;
-import com.PeleaCPU.resources.Pokemon;
+import com.BattleCPU.resources.CargarEquipoRival;
+import com.BattleCPU.resources.Movimiento;
+import com.BattleCPU.resources.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +66,7 @@ public class interfazCodigo {
             JButton button = new JButton();
             button.setOpaque(true);
             String imagenPokemon = equipo.get(i).getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(100,100, java.awt.Image.SCALE_SMOOTH));
             button.setIcon(image);
@@ -96,7 +96,7 @@ public class interfazCodigo {
         objeto.setOpaque(true);
         if(pokemonSelected.getObjeto() != null){
             String imagenObjeto = pokemonSelected.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon iconObjeto = new ImageIcon(path2);
             objeto.setIcon(iconObjeto);
             aux.add(objeto, FlowLayout.RIGHT);
@@ -105,7 +105,7 @@ public class interfazCodigo {
 
         JLabel pokemonImage = new JLabel();
         String imagenPokemon = pokemonSelected.getEspecie().toLowerCase()+".png";
-        String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+        String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
         ImageIcon iconPokemon = new ImageIcon(path);
         Icon image = new ImageIcon(iconPokemon.getImage().getScaledInstance(panel.getWidth()-20, panel.getHeight()-aux.getHeight()-20, java.awt.Image.SCALE_SMOOTH));
         pokemonImage.setIcon(image);

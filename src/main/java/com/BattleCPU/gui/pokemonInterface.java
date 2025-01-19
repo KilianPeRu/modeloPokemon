@@ -2,8 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.PeleaCPU.gui;
-import com.PeleaCPU.resources.*;
+package com.BattleCPU.gui;
+import com.BattleCPU.resources.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -492,7 +492,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -501,7 +501,7 @@ public class pokemonInterface extends JFrame {
             Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
              */
             String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon icon2 = new ImageIcon(path2);
             Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
             btnObjeto.setIcon(image2);
@@ -530,7 +530,7 @@ public class pokemonInterface extends JFrame {
             /*
             Default set used when no Pokemon is in the spot
              */
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             btnObjeto.setIcon(null);
@@ -562,7 +562,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -571,7 +571,7 @@ public class pokemonInterface extends JFrame {
             Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
              */
             String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon icon2 = new ImageIcon(path2);
             Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
             btnObjeto.setIcon(image2);
@@ -601,7 +601,7 @@ public class pokemonInterface extends JFrame {
             Default set used when no Pokemon is in the spot
              */
 
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             btnObjeto.setIcon(null);
@@ -629,7 +629,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -641,7 +641,7 @@ public class pokemonInterface extends JFrame {
                 btnObjeto.setIcon(null);
             }else{
                 String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-                String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+                String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
                 ImageIcon icon2 = new ImageIcon(path2);
                 Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
                 btnObjeto.setIcon(image2);
@@ -671,7 +671,7 @@ public class pokemonInterface extends JFrame {
             /*
             Default set used when no Pokemon is in the spot
              */
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             btnObjeto.setIcon(null);
@@ -699,7 +699,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -708,7 +708,7 @@ public class pokemonInterface extends JFrame {
             Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
              */
             String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon icon2 = new ImageIcon(path2);
             Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
             btnObjeto.setIcon(image2);
@@ -737,7 +737,7 @@ public class pokemonInterface extends JFrame {
             /*
             Default set used when no Pokemon is in the spot
              */
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             btnObjeto.setIcon(null);
@@ -765,7 +765,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -774,7 +774,7 @@ public class pokemonInterface extends JFrame {
             Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
              */
             String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon icon2 = new ImageIcon(path2);
             Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
             btnObjeto.setIcon(image2);
@@ -803,7 +803,7 @@ public class pokemonInterface extends JFrame {
             /*
             Default set used when no Pokemon is in the spot
              */
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             btnObjeto.setIcon(null);
@@ -831,7 +831,7 @@ public class pokemonInterface extends JFrame {
             Set of the Pokemon Image when selected (PNG are a MUST)
              */
             String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/mycompany/gui/imagenes/"+imagenPokemon;
+            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
             ImageIcon icon = new ImageIcon(path);
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);// NOI18N
@@ -840,7 +840,7 @@ public class pokemonInterface extends JFrame {
             Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
              */
             String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/mycompany/gui/objetos/"+imagenObjeto;
+            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
             ImageIcon icon2 = new ImageIcon(path2);
             Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
             btnObjeto.setIcon(image2);
@@ -869,7 +869,7 @@ public class pokemonInterface extends JFrame {
             /*
             Default set used when no Pokemon is in the spot
              */
-            ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/gui/imagenes/default.png");
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
             jLabel2.setIcon(image);
             nickname.setText("");
