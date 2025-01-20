@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class Iniciador {
+public class Inicio {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/Javamon";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
