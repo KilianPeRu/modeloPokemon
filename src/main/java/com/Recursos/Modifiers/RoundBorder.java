@@ -9,10 +9,9 @@ public class RoundBorder extends AbstractBorder {
     public RoundBorder(int radius) {
         this.radius = radius;
     }
-
+//Dibuja el Borde
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        // Dibuja un borde redondeado alrededor del JButton
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(Color.BLACK); // Color del borde
