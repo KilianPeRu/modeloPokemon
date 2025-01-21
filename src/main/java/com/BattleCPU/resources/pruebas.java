@@ -25,7 +25,6 @@ public class pruebas {
         // Empezamos la aplicacion y hacemos el JFrame que lo almacena
         pruebas app = new pruebas();
         app.gameStart();
-
         JFrame frame = new JFrame("Alpha Battle");
         frame.add(app.initComponents());
         frame.setVisible(true);

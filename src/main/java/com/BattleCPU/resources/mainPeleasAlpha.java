@@ -21,13 +21,11 @@ public class mainPeleasAlpha {
     JProgressBar barrap1; // Barra de vida Usuario
     JProgressBar barrap2; // Barra de vida de la CPU
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public mainPeleasAlpha() throws SQLException, ClassNotFoundException {
         // Empezamos la aplicacion y hacemos el JFrame que lo almacena
-        pruebas app = new pruebas();
-        app.gameStart();
-
+        gameStart();
         JFrame frame = new JFrame("Alpha Battle");
-        frame.add(app.initComponents());
+        frame.add(initComponents());
         frame.setVisible(true);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,7 +136,7 @@ public class mainPeleasAlpha {
         barraHP.setMaximum(p.getHp());//Settea el maximo
 
         barraHP.setStringPainted(true);
-        barraHP.setForeground(p.getColorType());//Le pone el color segun su tipo
+        barraHP.setBackground(p.getColorType());//Le pone el color segun su tipo
         barraHP.setBorder(new LineBorder(Color.BLACK, 2));//Pone el borde
 
         barraHP.setPreferredSize(new Dimension(300, barraHP.getPreferredSize().height));//Pone el tamaño que queremos
