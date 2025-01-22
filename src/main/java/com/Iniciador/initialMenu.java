@@ -7,6 +7,7 @@ package com.Iniciador;
 import com.BattleCPU.resources.CargarEquipoRival;
 import com.BattleCPU.resources.Pokemon;
 import com.BattleCPU.resources.mainPeleasAlpha;
+import com.Recursos.Modifiers.RoundBorder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -230,21 +231,28 @@ public class initialMenu extends javax.swing.JFrame {
         equipo = loadTeam(listaEquipo);
         add(equipo, BorderLayout.EAST);
     }
-    private JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) {
-        JPanel team = new JPanel(new GridLayout(equipoPokemon.size(), 1));
-        team.setPreferredSize(new Dimension(120, equipoPokemon.size() * 100));
-        for (Pokemon pokemon : equipoPokemon) {
+    public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) {
+        JPanel team = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 5, 5); // 5px de padding en todos los lados
+
+        for (int i = 0; i < equipoPokemon.size(); i++) {
+            gbc.gridx = 0; // Mantenemos la columna en 0
+            gbc.gridy = i; // Incrementamos la fila para cada Pokémon
+
             JButton bttn = new JButton();
-            bttn.setSize(new Dimension(100, 100));
-            bttn.setMargin(new Insets(0, 0, 0, 100));
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + pokemon.getEspecie().toLowerCase() + ".png");
+            bttn.setPreferredSize(new Dimension(100, menu.getHeight() / equipoPokemon.size() - 10));
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + equipoPokemon.get(i).getEspecie().toLowerCase() + ".png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
             bttn.setIcon(image);
-            bttn.setBorder(new EmptyBorder(0, 0, 0, 0));
-            team.add(bttn);
+            bttn.setBorder(new RoundBorder(9));
+            bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 5, 5, 10)));
+            team.add(bttn, gbc);
         }
+
         return team;
     }
+
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
         // TODO add your handling code here:
 
@@ -299,6 +307,7 @@ public class initialMenu extends javax.swing.JFrame {
         //Setteo de iconos para hoverManager
         Icon iconsettings = getIcono("src/main/java/com/Recursos/utils/engranaje.png");
         Icon iconCPU = getIcono("src/main/java/com/Recursos/utils/logoCPU.png");
+        Icon iconBattle = getIcono("src/main/java/com/Recursos/utils/onlineBattle.png");
 
         //Imagen del boton de settings
         settings.setIcon(getIcono("src/main/java/com/Recursos/utils/engranaje.png",settings.getWidth(),settings.getHeight()));
@@ -311,6 +320,10 @@ public class initialMenu extends javax.swing.JFrame {
         buttonCPU.setIcon(getIcono("src/main/java/com/Recursos/utils/logoCPU.png",buttonCPU.getWidth(),buttonCPU.getHeight()));
         buttonCPU.setBorder(new LineBorder(Color.BLACK,2));
         buttonCPU.addMouseListener(hoverManager(buttonCPU, iconCPU));
+        //Imagen del boton de la pelea Online
+        buttonBattle.setIcon(getIcono("src/main/java/com/Recursos/utils/onlineBattle.png",buttonBattle.getWidth(),buttonBattle.getHeight()));
+        buttonBattle.setBorder(new LineBorder(Color.BLACK,2));
+        buttonBattle.addMouseListener(hoverManager(buttonBattle, iconBattle));
 
     }
     public MouseAdapter hoverManager(JButton button, Icon icon){
@@ -362,7 +375,7 @@ public class initialMenu extends javax.swing.JFrame {
         SwingUtilities.invokeLater(() -> {
             // Crear un panel con la imagen
             ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/utils/engranaje.png"); // Cambia la ruta según tu imagen
-            JLabel label = new JLabel("Mensaje Emergente", icon, JLabel.CENTER);
+            JLabel label = new JLabel("Estamos trabajando...", icon, JLabel.CENTER);
             label.setHorizontalTextPosition(SwingConstants.CENTER);
             label.setVerticalTextPosition(SwingConstants.BOTTOM);
 
