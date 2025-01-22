@@ -23,6 +23,8 @@ import com.Recursos.Modifiers.RoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,6 +49,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         setofGUI();
+        addKeyListeners();
         setVisible(true);
     }
 
@@ -124,40 +127,40 @@ public class LogIn extends javax.swing.JFrame {
         javax.swing.GroupLayout logContainerLayout = new javax.swing.GroupLayout(logContainer);
         logContainer.setLayout(logContainerLayout);
         logContainerLayout.setHorizontalGroup(
-            logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logContainerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(logContainerLayout.createSequentialGroup()
-                        .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwd)
-                            .addComponent(user))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(userField)
-                            .addComponent(passwdField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                    .addGroup(logContainerLayout.createSequentialGroup()
-                        .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
-                .addContainerGap())
+                logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(logContainerLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(logContainerLayout.createSequentialGroup()
+                                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(passwd)
+                                                        .addComponent(user))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(userField)
+                                                        .addComponent(passwdField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                                        .addGroup(logContainerLayout.createSequentialGroup()
+                                                .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         logContainerLayout.setVerticalGroup(
-            logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logContainerLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(user)
-                    .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwd)
-                    .addComponent(passwdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iniciarSesion)
-                    .addComponent(registrar))
-                .addContainerGap(52, Short.MAX_VALUE))
+                logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(logContainerLayout.createSequentialGroup()
+                                .addContainerGap(52, Short.MAX_VALUE)
+                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(user)
+                                        .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(passwd)
+                                        .addComponent(passwdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(logContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(iniciarSesion)
+                                        .addComponent(registrar))
+                                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         settings.setBackground(panel.getBackground());
@@ -171,28 +174,28 @@ public class LogIn extends javax.swing.JFrame {
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
-                .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLayout.createSequentialGroup()
+                                .addContainerGap(209, Short.MAX_VALUE)
+                                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                                .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31))
         );
         panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(logContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addComponent(logContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,7 +256,35 @@ public class LogIn extends javax.swing.JFrame {
         //Settea la transparencia del panel de inicio de Sesion
         logContainer.setBackground(new Color(255, 255, 255, 180));
     }
+    public void addKeyListeners() {
+        KeyListener enterKeyListener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // No utilizado
+            }
 
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    try {
+                        iniciarSesionActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "EnterKeyPressed"));
+                    } catch (SQLException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(panel, "Ocurrió un error al iniciar sesión.");
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No utilizado
+            }
+        };
+
+        // Agregar el KeyListener a los campos de texto
+        userField.addKeyListener(enterKeyListener);
+        passwdField.addKeyListener(enterKeyListener);
+    }
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
         JFrame frame = new JFrame("Registro");

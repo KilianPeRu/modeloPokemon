@@ -234,7 +234,7 @@ public class initialMenu extends javax.swing.JFrame {
     public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) {
         JPanel team = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 0, 5, 5); // 5px de padding en todos los lados
+        gbc.insets = new Insets(0, 10, 5, 5); // 5px de padding en todos los lados
 
         for (int i = 0; i < equipoPokemon.size(); i++) {
             gbc.gridx = 0; // Mantenemos la columna en 0
@@ -246,7 +246,7 @@ public class initialMenu extends javax.swing.JFrame {
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
             bttn.setIcon(image);
             bttn.setBorder(new RoundBorder(9));
-            bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 5, 5, 10)));
+            bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
             team.add(bttn, gbc);
         }
 
