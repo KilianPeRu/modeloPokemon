@@ -4,6 +4,7 @@
  */
 package com.Iniciador;
 
+import com.BattleCPU.gui.pokemonInterface;
 import com.BattleCPU.resources.CargarEquipoRival;
 import com.BattleCPU.resources.Pokemon;
 import com.BattleCPU.resources.mainPeleasAlpha;
@@ -15,10 +16,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -227,16 +225,17 @@ public class initialMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void iniciar() {
+    private void iniciar() throws SQLException, ClassNotFoundException {
         equipo = loadTeam(listaEquipo);
         add(equipo, BorderLayout.EAST);
     }
-    public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) {
+    public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) throws SQLException, ClassNotFoundException {
         JPanel team = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0, 10, 5, 5); // 5px de padding en todos los lados
 
         for (int i = 0; i < equipoPokemon.size(); i++) {
+            int indice = i;
             gbc.gridx = 0; // Mantenemos la columna en 0
             gbc.gridy = i; // Incrementamos la fila para cada Pokémon
 
@@ -247,6 +246,18 @@ public class initialMenu extends javax.swing.JFrame {
             bttn.setIcon(image);
             bttn.setBorder(new RoundBorder(9));
             bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+            bttn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        new pokemonInterface(listaEquipo, listaEquipo.get(indice));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
             team.add(bttn, gbc);
         }
 

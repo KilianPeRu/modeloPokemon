@@ -3,44 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.BattleCPU.gui;
+
 import com.BattleCPU.resources.*;
+import com.Recursos.Modifiers.RoundBorder;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author exosh
  */
 public class pokemonInterface extends JFrame {
-    Pokemon p1 = new Pokemon("0000001A", "Test1","Azumarill","Agua","Hada","Fuerza Bruta","Cinta Eleccion",100,50,80,60,80,50,1,1,1,1);
-    Pokemon p2 = new Pokemon("0000001A", "Test2","Hydreigon","Siniestro","Dragon","Levitacion","Gafas Eleccion",92,105,90,125,90,98,1,1,1,1);
-    Pokemon p3 = new Pokemon("0000001A", "Test3","Primeape","Lucha",null,"Irascible",null,65,105,60,60,70,95,1,1,1,1);
-    Pokemon[] list = {p1,p2,p3,null,null,null};
-    ArrayList<Pokemon> listPokemon = savePokemon(list);
+    ArrayList<Pokemon> listPokemon;
 
-    /**
-     * System saves all pokemon in the system to the ArrayList
-     */
-    public ArrayList<Pokemon> savePokemon(Pokemon[] p){
-            ArrayList<Pokemon> aux = new ArrayList<Pokemon>();
-            for(Pokemon poke : p){
-                aux.add(poke);
-            }
-            return aux;
-    }
-
-
-
-    /**
-     * Creates new form pokemonInterface
-     */
-    public pokemonInterface() {
-        initComponents();
+    public pokemonInterface(ArrayList<Pokemon> listPokemon, Pokemon pokemonSelected) throws SQLException, ClassNotFoundException {
+        this.listPokemon = listPokemon;
+        initComponents(pokemonSelected);
+        add(loadTeam(listPokemon), BorderLayout.EAST);
+        paint(pokemonSelected);
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -50,10 +39,11 @@ public class pokemonInterface extends JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(Pokemon pokemonSelected) {
 
         titulo = new javax.swing.JPanel();
         nickname = new javax.swing.JLabel();
+        lvPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         level = new javax.swing.JLabel();
         main = new javax.swing.JPanel();
@@ -73,113 +63,113 @@ public class pokemonInterface extends JFrame {
         eat = new javax.swing.JLabel();
         edf = new javax.swing.JLabel();
         vel = new javax.swing.JLabel();
-        moves = new javax.swing.JPanel();
-        bntMove1 = new javax.swing.JButton();
-        btnMove2 = new javax.swing.JButton();
-        btnMove3 = new javax.swing.JButton();
-        btnMove4 = new javax.swing.JButton();
+        moves = movimientos(pokemonSelected);
         btnObjeto = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         habilidad = new javax.swing.JLabel();
         hEfect = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnEquipo1 = new javax.swing.JButton();
-        btnEquipo2 = new javax.swing.JButton();
-        btnEquipo3 = new javax.swing.JButton();
-        btnEquipo4 = new javax.swing.JButton();
-        btnEquipo5 = new javax.swing.JButton();
-        btnEquipo6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         titulo.setBackground(new java.awt.Color(153, 153, 153));
 
         nickname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        nickname.setText("NOMBRE");
 
         jLabel1.setText("Lv.");
 
         level.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        level.setText("LV");
+
+        javax.swing.GroupLayout lvPanelLayout = new javax.swing.GroupLayout(lvPanel);
+        lvPanel.setLayout(lvPanelLayout);
+        lvPanelLayout.setHorizontalGroup(
+            lvPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lvPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        lvPanelLayout.setVerticalGroup(
+            lvPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lvPanelLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(lvPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(level))
+                .addGap(5, 5, 5))
+        );
 
         javax.swing.GroupLayout tituloLayout = new javax.swing.GroupLayout(titulo);
         titulo.setLayout(tituloLayout);
         tituloLayout.setHorizontalGroup(
             tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nickname, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(nickname)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1144, Short.MAX_VALUE)
+                .addComponent(lvPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         tituloLayout.setVerticalGroup(
             tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tituloLayout.createSequentialGroup()
+            .addGroup(tituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nickname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(level))
+                    .addComponent(lvPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        getContentPane().add(titulo, java.awt.BorderLayout.NORTH);
 
         main.setBackground(new java.awt.Color(211, 251, 255));
 
         type1.setBackground(new java.awt.Color(102, 102, 102));
-        type1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        type1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         type1.setText("Tipo1");
 
-        name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        name.setText("jLabel4");
+        name.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jLabel5.setText("Entrenador:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         type2.setBackground(new java.awt.Color(102, 102, 102));
-        type2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        type2.setText("Tipo2");
+        type2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        type2.setText("Type2");
 
-        trainerID.setText("trainerID");
+        trainerID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setText("Ataque");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel10.setText("Defensa");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Ataque Especial");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("Defensa Especial");
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("Velocidad");
 
-        atq.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        atq.setText("ATQ");
+        atq.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        def.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        def.setText("DEF");
+        def.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        eat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        eat.setText("EAT");
+        eat.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        edf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        edf.setText("EDF");
+        edf.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        vel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        vel.setText("VEL");
+        vel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout statsLayout = new javax.swing.GroupLayout(stats);
         stats.setLayout(statsLayout);
         statsLayout.setHorizontalGroup(
             statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addGroup(statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(statsLayout.createSequentialGroup()
                         .addComponent(jLabel12)
@@ -195,18 +185,18 @@ public class pokemonInterface extends JFrame {
                             .addComponent(vel, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(statsLayout.createSequentialGroup()
                         .addGroup(statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(52, 52, 52)
                         .addGroup(statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(eat, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(def, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         statsLayout.setVerticalGroup(
             statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statsLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(atq))
@@ -226,65 +216,19 @@ public class pokemonInterface extends JFrame {
                 .addGroup(statsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(vel))
-                .addGap(18, 18, 18))
+                .addGap(43, 43, 43))
         );
-
-        bntMove1.setText("Move1");
-        bntMove1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntMove1ActionPerformed(evt);
-            }
-        });
-
-        btnMove2.setText("Move2");
-        btnMove2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMove2ActionPerformed(evt);
-            }
-        });
-
-        btnMove3.setText("Move3");
-        btnMove3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMove3ActionPerformed(evt);
-            }
-        });
-
-        btnMove4.setText("Move4");
-        btnMove4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMove4ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout movesLayout = new javax.swing.GroupLayout(moves);
         moves.setLayout(movesLayout);
         movesLayout.setHorizontalGroup(
             movesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(movesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(movesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bntMove1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMove2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(btnMove3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMove4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGap(0, 287, Short.MAX_VALUE)
         );
         movesLayout.setVerticalGroup(
             movesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(movesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bntMove1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMove2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMove3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMove4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 409, Short.MAX_VALUE)
         );
-
-        movesLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bntMove1, btnMove2, btnMove3, btnMove4});
 
         btnObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,18 +238,19 @@ public class pokemonInterface extends JFrame {
 
         habilidad.setText("HABILIDAD");
 
-        hEfect.setText("Efecto");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(hEfect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(habilidad, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(hEfect, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(habilidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +258,7 @@ public class pokemonInterface extends JFrame {
                 .addContainerGap()
                 .addComponent(habilidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hEfect, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addComponent(hEfect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -321,636 +266,150 @@ public class pokemonInterface extends JFrame {
         main.setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+            .addGroup(mainLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(mainLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(trainerID, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(moves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(type1)
+                        .addGap(20, 20, 20)
+                        .addComponent(type2)))
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainLayout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(295, 295, 295))
-                    .addGroup(mainLayout.createSequentialGroup()
-                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(moves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(mainLayout.createSequentialGroup()
-                                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(type1)
-                                    .addComponent(jLabel5))
-                                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(mainLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(trainerID, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(mainLayout.createSequentialGroup()
-                                        .addGap(82, 82, 82)
-                                        .addComponent(type2)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(111, 111, 111)
                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(117, 117, 117))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(stats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(mainLayout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(157, 157, 157))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(19, 19, 19)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(trainerID)))
+                .addGap(18, 18, 18)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainLayout.createSequentialGroup()
-                        .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainLayout.createSequentialGroup()
-                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(trainerID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(type2)
-                            .addComponent(type1))
-                        .addGap(32, 32, 32)
-                        .addComponent(moves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(mainLayout.createSequentialGroup()
+                                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mainLayout.createSequentialGroup()
+                                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(type2)
+                                        .addComponent(type1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(mainLayout.createSequentialGroup()
+                                .addGap(0, 92, Short.MAX_VALUE)
+                                .addComponent(moves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(125, 125, 125))))
         );
 
-        jPanel2.setBackground(new java.awt.Color(216, 251, 251));
-
-        btnEquipo1.setText("btnEquipo1");
-        btnEquipo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo1ActionPerformed(evt);
-            }
-        });
-
-        btnEquipo2.setText("btnEquipo2");
-        btnEquipo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo2ActionPerformed(evt);
-            }
-        });
-
-        btnEquipo3.setText("btnEquipo3");
-        btnEquipo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo3ActionPerformed(evt);
-            }
-        });
-
-        btnEquipo4.setText("btnEquipo4");
-        btnEquipo4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo4ActionPerformed(evt);
-            }
-        });
-
-        btnEquipo5.setText("btnEquipo5");
-        btnEquipo5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo5ActionPerformed(evt);
-            }
-        });
-
-        btnEquipo6.setText("btnEquipo6");
-        btnEquipo6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquipo6ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnEquipo6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEquipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEquipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEquipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEquipo5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(btnEquipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEquipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEquipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEquipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEquipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEquipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEquipo6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEquipo1, btnEquipo2, btnEquipo3, btnEquipo4, btnEquipo5, btnEquipo6});
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        getContentPane().add(main, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEquipo1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo1ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(0);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-            ImageIcon icon2 = new ImageIcon(path2);
-            Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            btnObjeto.setIcon(image2);
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            btnObjeto.setIcon(null);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo1ActionPerformed
-
-    private void btnObjetoActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnObjetoActionPerformed
+    private void btnObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObjetoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnObjetoActionPerformed
+    public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) {
+        JPanel team = new JPanel(new GridBagLayout());
+        team.setBorder(new EmptyBorder(0,10,0,10));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 10, 5, 5); // 5px de padding en todos los lados
 
-    private void btnEquipo2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo2ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(1);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-            ImageIcon icon2 = new ImageIcon(path2);
-            Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            btnObjeto.setIcon(image2);
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            btnObjeto.setIcon(null);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo2ActionPerformed
-
-    private void btnEquipo3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo3ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(2);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            if(p.getObjeto() == null){
-                btnObjeto.setIcon(null);
-            }else{
-                String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-                String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-                ImageIcon icon2 = new ImageIcon(path2);
-                Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-                btnObjeto.setIcon(image2);
-            }
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            btnObjeto.setIcon(null);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo3ActionPerformed
-
-    private void btnEquipo4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo4ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(3);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-            ImageIcon icon2 = new ImageIcon(path2);
-            Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            btnObjeto.setIcon(image2);
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            btnObjeto.setIcon(null);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo4ActionPerformed
-
-    private void btnEquipo5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo5ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(4);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-            ImageIcon icon2 = new ImageIcon(path2);
-            Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            btnObjeto.setIcon(image2);
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            btnObjeto.setIcon(null);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo5ActionPerformed
-
-    private void btnEquipo6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnEquipo6ActionPerformed
-        // TODO add your handling code here:
-        Pokemon p = listPokemon.get(5);
-        if(p!=null){
-            /*
-            Set of the Pokemon Image when selected (PNG are a MUST)
-             */
-            String imagenPokemon = p.getEspecie().toLowerCase()+".png";
-            String path = "src/main/java/com/Recursos/pokemonImages/"+imagenPokemon;
-            ImageIcon icon = new ImageIcon(path);
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);// NOI18N
-
-            /*
-            Set of the Object Image when a Pokemon is selected (PNG also MUST be used)
-             */
-            String imagenObjeto = p.getObjeto().toLowerCase().replace(" ", "")+".png";
-            String path2 = "src/main/java/com/Recursos/objetos/"+imagenObjeto;
-            ImageIcon icon2 = new ImageIcon(path2);
-            Icon image2 = new ImageIcon(icon2.getImage().getScaledInstance(btnObjeto.getWidth()-10, btnObjeto.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            btnObjeto.setIcon(image2);
-
-            /*
-            Set of interface colors
-             */
-            p.setColorType(p.getTipo1());
-            titulo.setBackground(p.getColorType());
-            /*
-            Show the pokemon data
-             */
-            nickname.setText(p.getNombre());
-            level.setText("50");
-            name.setText(p.getEspecie());
-            type1.setText(p.getTipo1());
-            type2.setText(p.getTipo2());
-            trainerID.setText(p.getIdTrainer());
-            atq.setText(String.valueOf(p.getAtq()));
-            def.setText(String.valueOf(p.getDef()));
-            eat.setText(String.valueOf(p.getEat()));
-            edf.setText(String.valueOf(p.getEdf()));
-            vel.setText(String.valueOf(p.getVel()));
-            habilidad.setText(String.valueOf(p.getHabilidad()));
-        }else{
-            /*
-            Default set used when no Pokemon is in the spot
-             */
-            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/default.png");
-            Icon image = new ImageIcon(icon.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabel2.setIcon(image);
-            nickname.setText("");
-            level.setText("");
-            name.setText("");
-            type1.setText("");
-            type2.setText("");
-            trainerID.setText("");
-            atq.setText("");
-            def.setText("");
-            eat.setText("");
-            edf.setText("");
-            vel.setText("");
-            habilidad.setText("");
-            btnObjeto.setText("");
-        }
-    }//GEN-LAST:event_btnEquipo6ActionPerformed
-
-    private void bntMove1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bntMove1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntMove1ActionPerformed
-
-    private void btnMove2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnMove2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMove2ActionPerformed
-
-    private void btnMove3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnMove3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMove3ActionPerformed
-
-    private void btnMove4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnMove4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMove4ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        for (int i = 0; i < equipoPokemon.size(); i++) {
+            gbc.gridx = 0; // Mantenemos la columna en 0
+            gbc.gridy = i; // Incrementamos la fila para cada Pokémon
+            int indice = i;
+            JButton bttn = new JButton();
+            bttn.setPreferredSize(new Dimension(100, getHeight() / equipoPokemon.size() - 10));
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + equipoPokemon.get(i).getEspecie().toLowerCase() + ".png");
+            Icon image = new ImageIcon(icon.getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
+            bttn.setIcon(image);
+            bttn.setBorder(new RoundBorder(9));
+            bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+            bttn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    paint(listPokemon.get(indice));
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pokemonInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(pokemonInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(pokemonInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pokemonInterface.class.getName()).log(Level.SEVERE, null, ex);
+            });
+            team.add(bttn, gbc);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new pokemonInterface().setVisible(true);
-            }
-        });
+        return team;
     }
+    public void paint(Pokemon p){
+        ImageIcon pokemon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + p.getEspecie().toLowerCase() + ".png");
+        Icon imagePokemon = new ImageIcon(pokemon.getImage().getScaledInstance(jLabel2.getWidth(),jLabel2.getHeight(),Image.SCALE_SMOOTH));
+        jLabel2.setIcon(imagePokemon);
+        type1.setText(p.getTipo1());
+        type2.setText(p.getTipo2() == null ? "" : p.getTipo2());
+        level.setText(p.getNivel() + "");
+        lvPanel.setBackground(new Color(255,255,255,180));
+        name.setText(p.getEspecie());
 
+        nickname.setText(p.getNombre());
+        nickname.setBackground(new Color(255,255,255,180));
+        nickname.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9,colorContrario(p.getColorType()), 3), new EmptyBorder(5,10,5,10)));
+        nickname.setOpaque(true);
+
+        titulo.setBackground(p.getColorType());
+        trainerID.setText(p.getIdTrainer());
+        atq.setText(String.valueOf(p.getAtq()));
+        def.setText(String.valueOf(p.getDef()));
+        eat.setText(String.valueOf(p.getEat()));
+        edf.setText(String.valueOf(p.getEdf()));
+        vel.setText(String.valueOf(p.getVel()));
+        if (p.getObjeto() != null) {
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/objetos/" + p.getObjeto().toLowerCase() + ".png");
+            Icon image = new ImageIcon(icon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+            btnObjeto.setIcon(image);
+        }
+        moves.removeAll(); // Clear existing elements (optional)
+        moves.add(movimientos(p));
+    }
+    public Color colorContrario (Color cambiar){
+        Color aCambiar = cambiar;
+        aCambiar = new Color(255-aCambiar.getRed(),255 - aCambiar.getGreen(), 255 - aCambiar.getBlue());
+        return aCambiar;
+    }
+    public JPanel movimientos(Pokemon p){
+        JPanel movs = new JPanel(new GridLayout(p.getMovimientos().length,1));
+        for(int i = 0; i < p.getMovimientos().length; i++){
+            JButton mov = new JButton(p.getMovimientos()[i].getNombre());
+            movs.add(mov);
+        }
+        return movs;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel atq;
-    private javax.swing.JButton bntMove1;
-    private javax.swing.JButton btnEquipo1;
-    private javax.swing.JButton btnEquipo2;
-    private javax.swing.JButton btnEquipo3;
-    private javax.swing.JButton btnEquipo4;
-    private javax.swing.JButton btnEquipo5;
-    private javax.swing.JButton btnEquipo6;
-    private javax.swing.JButton btnMove2;
-    private javax.swing.JButton btnMove3;
-    private javax.swing.JButton btnMove4;
     private javax.swing.JButton btnObjeto;
     private javax.swing.JLabel def;
     private javax.swing.JLabel eat;
@@ -966,8 +425,8 @@ public class pokemonInterface extends JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel level;
+    private javax.swing.JPanel lvPanel;
     private javax.swing.JPanel main;
     private javax.swing.JPanel moves;
     private javax.swing.JLabel name;
