@@ -41,35 +41,6 @@ public class pokemonInterface extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents(Pokemon pokemonSelected) {
 
-        titulo = new javax.swing.JPanel();
-        nickname = new javax.swing.JLabel();
-        lvPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        level = new javax.swing.JLabel();
-        main = new javax.swing.JPanel();
-        type1 = new javax.swing.JLabel();
-        name = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        type2 = new javax.swing.JLabel();
-        trainerID = new javax.swing.JLabel();
-        stats = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        atq = new javax.swing.JLabel();
-        def = new javax.swing.JLabel();
-        eat = new javax.swing.JLabel();
-        edf = new javax.swing.JLabel();
-        vel = new javax.swing.JLabel();
-        moves = movimientos(pokemonSelected);
-        btnObjeto = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        habilidad = new javax.swing.JLabel();
-        hEfect = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         titulo.setBackground(new java.awt.Color(153, 153, 153));
@@ -392,50 +363,77 @@ public class pokemonInterface extends JFrame {
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
             btnObjeto.setIcon(image);
         }
-        moves.removeAll(); // Clear existing elements (optional)
-        moves.add(movimientos(p));
+        actualizarPanelMoves(p);
     }
     public Color colorContrario (Color cambiar){
         Color aCambiar = cambiar;
         aCambiar = new Color(255-aCambiar.getRed(),255 - aCambiar.getGreen(), 255 - aCambiar.getBlue());
         return aCambiar;
     }
-    public JPanel movimientos(Pokemon p){
-        JPanel movs = new JPanel(new GridLayout(p.getMovimientos().length,1));
-        for(int i = 0; i < p.getMovimientos().length; i++){
+    public JPanel movimientos(Pokemon p) {
+        JPanel movs = new JPanel(new GridLayout(p.getMovimientos().length, 1)); // Layout adaptable
+        for (int i = 0; i < p.getMovimientos().length; i++) {
             JButton mov = new JButton(p.getMovimientos()[i].getNombre());
             movs.add(mov);
         }
         return movs;
     }
+    public GroupLayout layoutMoves() {
+        GroupLayout gp = new javax.swing.GroupLayout(moves);
+        moves.setLayout(gp);
+        gp.setHorizontalGroup(
+                gp.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 287, Short.MAX_VALUE)
+        );
+        gp.setVerticalGroup(
+                gp.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 409, Short.MAX_VALUE)
+        );
+        return gp;
+    }
+    public void actualizarPanelMoves(Pokemon p) {
+        moves.removeAll();
+        JPanel nuevoContenido = movimientos(p);
+        GroupLayout gp = layoutMoves();
+        gp.setHorizontalGroup(
+                gp.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(nuevoContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+        );
+        gp.setVerticalGroup(
+                gp.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(nuevoContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+        );
+        moves.revalidate();
+        moves.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel atq;
-    private javax.swing.JButton btnObjeto;
-    private javax.swing.JLabel def;
-    private javax.swing.JLabel eat;
-    private javax.swing.JLabel edf;
-    private javax.swing.JLabel hEfect;
-    private javax.swing.JLabel habilidad;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel level;
-    private javax.swing.JPanel lvPanel;
-    private javax.swing.JPanel main;
-    private javax.swing.JPanel moves;
-    private javax.swing.JLabel name;
-    private javax.swing.JLabel nickname;
-    private javax.swing.JPanel stats;
-    private javax.swing.JPanel titulo;
-    private javax.swing.JLabel trainerID;
-    private javax.swing.JLabel type1;
-    private javax.swing.JLabel type2;
-    private javax.swing.JLabel vel;
+    private javax.swing.JLabel atq = new javax.swing.JLabel();
+    private javax.swing.JButton btnObjeto = new javax.swing.JButton();
+    private javax.swing.JLabel def= new javax.swing.JLabel();
+    private javax.swing.JLabel eat= new javax.swing.JLabel();
+    private javax.swing.JLabel edf= new javax.swing.JLabel();
+    private javax.swing.JLabel hEfect= new javax.swing.JLabel();
+    private javax.swing.JLabel habilidad= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel1= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel10= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel11= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel12= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel13= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel2= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel5= new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel9= new javax.swing.JLabel();
+    private javax.swing.JPanel jPanel1= new javax.swing.JPanel();
+    private javax.swing.JLabel level= new javax.swing.JLabel();
+    private javax.swing.JPanel lvPanel= new javax.swing.JPanel();
+    private javax.swing.JPanel main= new javax.swing.JPanel();
+    private javax.swing.JPanel moves= new javax.swing.JPanel();
+    private javax.swing.JLabel name= new javax.swing.JLabel();
+    private javax.swing.JLabel nickname= new javax.swing.JLabel();
+    private javax.swing.JPanel stats= new javax.swing.JPanel();
+    private javax.swing.JPanel titulo = new javax.swing.JPanel();
+    private javax.swing.JLabel trainerID= new javax.swing.JLabel();
+    private javax.swing.JLabel type1= new javax.swing.JLabel();
+    private javax.swing.JLabel type2= new javax.swing.JLabel();
+    private javax.swing.JLabel vel= new javax.swing.JLabel();
     // End of variables declaration//GEN-END:variables
 }
