@@ -30,6 +30,7 @@ public class mainPeleasAlpha {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     public void gameStart() throws SQLException, ClassNotFoundException {

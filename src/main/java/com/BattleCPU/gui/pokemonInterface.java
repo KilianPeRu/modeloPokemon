@@ -30,6 +30,8 @@ public class pokemonInterface extends JFrame {
         paint(pokemonSelected);
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
