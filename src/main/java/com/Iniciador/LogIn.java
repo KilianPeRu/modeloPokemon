@@ -26,11 +26,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -231,6 +235,7 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     private void setofGUI() {
+        musica("src/main/java/com/Recursos/Musica/musicaTienda.wav");
         title.setOpaque(false);
         //Settea el Boton de Settings
         ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/utils/engranaje.png");
@@ -313,7 +318,29 @@ public class LogIn extends javax.swing.JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }//GEN-LAST:event_registrarActionPerformed
+    public void musica(String rutaArchivo) {
 
+        try {
+            File archivoSonido = new File(rutaArchivo);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivoSonido);
+
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("El archivo de audio no es compatible.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Hubo un problema al leer el archivo de audio.");
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            System.out.println("El sistema no puede reproducir el sonido.");
+            e.printStackTrace();
+        }
+    }
     private void iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_iniciarSesionActionPerformed
         // TODO add your handling code here:
         String username = userField.getText();
