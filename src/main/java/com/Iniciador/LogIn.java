@@ -1,19 +1,4 @@
 /*
- * Click nbfs://nbhost            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public int getIconWidth() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public int getIconHeight() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        }SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.Iniciador;
@@ -385,7 +370,7 @@ public class LogIn extends JFrame {
 
         if (authenticateUser(username, password)) {
             JOptionPane.showMessageDialog(panel, "Login exitoso!");
-            new initialMenu(username, password, clip).setLocationRelativeTo(null);
+            new initialMenu(username, password, clip, musicOn).setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(panel, "Usuario o contraseña incorrectos.");

@@ -31,11 +31,13 @@ public class initialMenu extends javax.swing.JFrame {
     ArrayList<Pokemon> listaEquipo;
     JPanel equipo;
     Clip musica;
+    boolean musicOn;
     /**
      * Creates new form initialMenu
      */
-    public initialMenu(String username, String passwd, Clip clip) throws SQLException, ClassNotFoundException {
+    public initialMenu(String username, String passwd, Clip clip, boolean music) throws SQLException, ClassNotFoundException {
         listaEquipo = cargarEquipoRival.cargarEquipo(username);
+        this.musicOn = music;
         initComponents();
         iniciar();
         initializeGUI();
@@ -60,6 +62,7 @@ public class initialMenu extends javax.swing.JFrame {
         userID = new javax.swing.JButton();
         image = new javax.swing.JButton();
         settings = new javax.swing.JButton();
+        sound = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
         buttonPC = new javax.swing.JButton();
         buttonShop = new javax.swing.JButton();
@@ -121,14 +124,22 @@ public class initialMenu extends javax.swing.JFrame {
             }
         });
 
+        sound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soundActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topLayout = new javax.swing.GroupLayout(top);
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 718, Short.MAX_VALUE)
+                .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sound, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 672, Short.MAX_VALUE)
                 .addComponent(userProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -136,9 +147,10 @@ public class initialMenu extends javax.swing.JFrame {
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(settings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sound, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(settings, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -229,6 +241,20 @@ public class initialMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void iniciar() throws SQLException, ClassNotFoundException {
+        sound.setContentAreaFilled(false);
+        sound.setBorderPainted(false);
+        sound.setFocusPainted(false);
+        sound.setOpaque(false);
+        sound.setBorder(new EmptyBorder(0, 0, 0, 0));
+        if(musicOn) {
+            ImageIcon soundIcon = new ImageIcon("src/main/java/com/Recursos/utils/soundOn.png");
+            Icon imageIcon = new ImageIcon(soundIcon.getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH));
+            sound.setIcon(imageIcon);
+        }else{
+            ImageIcon soundIcon = new ImageIcon("src/main/java/com/Recursos/utils/soundOff.png");
+            Icon imageIcon = new ImageIcon(soundIcon.getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH));
+            sound.setIcon(imageIcon);
+        }
         equipo = loadTeam(listaEquipo);
         add(equipo, BorderLayout.EAST);
     }
@@ -316,6 +342,23 @@ public class initialMenu extends javax.swing.JFrame {
     private void imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_imageActionPerformed
+
+    private void soundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soundActionPerformed
+        // TODO add your handling code here:
+        if(musicOn) {
+            musicOn = false;
+            ImageIcon soundIcon = new ImageIcon("src/main/java/com/Recursos/utils/soundOff.png");
+            Icon imageIcon = new ImageIcon(soundIcon.getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH));
+            sound.setIcon(imageIcon);
+            musica.stop();
+        }else{
+            musicOn = true;
+            ImageIcon soundIcon = new ImageIcon("src/main/java/com/Recursos/utils/soundOn.png");
+            Icon imageIcon = new ImageIcon(soundIcon.getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH));
+            sound.setIcon(imageIcon);
+            musica.start();
+        }
+    }//GEN-LAST:event_soundActionPerformed
 
     private void initializeGUI() {
         //Setteo de iconos para hoverManager
@@ -414,6 +457,7 @@ public class initialMenu extends javax.swing.JFrame {
     private javax.swing.JButton image;
     private javax.swing.JPanel menu;
     private javax.swing.JButton settings;
+    private javax.swing.JButton sound;
     private javax.swing.JPanel top;
     private javax.swing.JButton userID;
     private javax.swing.JLabel userName;
