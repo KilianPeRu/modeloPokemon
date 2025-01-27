@@ -7,11 +7,14 @@ package com.BattleCPU.gui;
 import com.BattleCPU.resources.*;
 import com.Recursos.Modifiers.RoundBorder;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,9 +25,11 @@ import java.util.logging.Logger;
  */
 public class pokemonInterface extends JFrame {
     ArrayList<Pokemon> listPokemon;
+    Clip musica;
 
-    public pokemonInterface(ArrayList<Pokemon> listPokemon, Pokemon pokemonSelected) throws SQLException, ClassNotFoundException {
+    public pokemonInterface(ArrayList<Pokemon> listPokemon, Pokemon pokemonSelected, Clip clip) throws SQLException, ClassNotFoundException {
         this.listPokemon = listPokemon;
+        this.musica = clip;
         initComponents(pokemonSelected);
         add(loadTeam(listPokemon), BorderLayout.EAST);
         paint(pokemonSelected);
@@ -366,6 +371,28 @@ public class pokemonInterface extends JFrame {
             btnObjeto.setIcon(image);
         }
         actualizarPanelMoves(p);
+        crie(p);
+    }
+    public void crie(Pokemon p){
+        try {
+            File archivoSonido = new File("src/main/java/com/Recursos/Cries/" + p.getEspecie().toLowerCase() + ".wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivoSonido);
+
+            Clip clip = AudioSystem.getClip();
+
+            clip.open(audioStream);
+            clip.start();
+
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("El archivo de audio no es compatible.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Hubo un problema al leer el archivo de audio.");
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            System.out.println("El sistema no puede reproducir el sonido.");
+            e.printStackTrace();
+        }
     }
     public Color colorContrario (Color cambiar){
         Color aCambiar = cambiar;

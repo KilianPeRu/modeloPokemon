@@ -10,6 +10,7 @@ import com.BattleCPU.resources.Pokemon;
 import com.BattleCPU.resources.mainPeleasAlpha;
 import com.Recursos.Modifiers.RoundBorder;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -29,15 +30,17 @@ public class initialMenu extends javax.swing.JFrame {
     CargarEquipoRival cargarEquipoRival = new CargarEquipoRival();
     ArrayList<Pokemon> listaEquipo;
     JPanel equipo;
+    Clip musica;
     /**
      * Creates new form initialMenu
      */
-    public initialMenu(String username, String passwd) throws SQLException, ClassNotFoundException {
+    public initialMenu(String username, String passwd, Clip clip) throws SQLException, ClassNotFoundException {
         listaEquipo = cargarEquipoRival.cargarEquipo(username);
         initComponents();
         iniciar();
         initializeGUI();
         setVisible(true);
+        this.musica = clip;
     }
 
 
@@ -250,7 +253,7 @@ public class initialMenu extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        new pokemonInterface(listaEquipo, listaEquipo.get(indice));
+                        new pokemonInterface(listaEquipo, listaEquipo.get(indice),musica);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     } catch (ClassNotFoundException ex) {
