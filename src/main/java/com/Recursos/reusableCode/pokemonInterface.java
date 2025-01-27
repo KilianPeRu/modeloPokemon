@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.BattleCPU.gui;
+package com.Recursos.reusableCode;
 
 import com.BattleCPU.resources.*;
 import com.Recursos.Modifiers.RoundBorder;
@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author exosh
