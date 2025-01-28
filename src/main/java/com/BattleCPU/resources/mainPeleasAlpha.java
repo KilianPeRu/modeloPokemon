@@ -1,5 +1,7 @@
 package com.BattleCPU.resources;
 
+import com.Recursos.CargarEquipoRival;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;

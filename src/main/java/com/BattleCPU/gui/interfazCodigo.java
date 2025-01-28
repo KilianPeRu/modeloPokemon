@@ -1,6 +1,6 @@
 package com.BattleCPU.gui;
 
-import com.BattleCPU.resources.CargarEquipoRival;
+import com.Recursos.CargarEquipoRival;
 import com.BattleCPU.resources.Movimiento;
 import com.BattleCPU.resources.Pokemon;
 

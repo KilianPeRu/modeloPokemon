@@ -1,4 +1,7 @@
-package com.BattleCPU.resources;
+package com.Recursos;
+
+import com.BattleCPU.resources.Movimiento;
+import com.BattleCPU.resources.Pokemon;
 
 import java.sql.*;
 import java.util.ArrayList;

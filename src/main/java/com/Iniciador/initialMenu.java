@@ -5,7 +5,7 @@
 package com.Iniciador;
 
 import com.Recursos.reusableCode.pokemonInterface;
-import com.BattleCPU.resources.CargarEquipoRival;
+import com.Recursos.CargarEquipoRival;
 import com.BattleCPU.resources.Pokemon;
 import com.BattleCPU.resources.mainPeleasAlpha;
 import com.Recursos.Modifiers.RoundBorder;
