@@ -4,6 +4,7 @@
  */
 package com.Iniciador;
 
+import com.PokemonContainer.PokemonContainerGUI;
 import com.Recursos.reusableCode.pokemonInterface;
 import com.Recursos.CargarEquipoRival;
 import com.BattleCPU.resources.Pokemon;
@@ -11,6 +12,7 @@ import com.BattleCPU.resources.mainPeleasAlpha;
 import com.Recursos.Modifiers.RoundBorder;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -32,12 +34,14 @@ public class initialMenu extends javax.swing.JFrame {
     JPanel equipo;
     Clip musica;
     boolean musicOn;
+    String user;
     /**
      * Creates new form initialMenu
      */
     public initialMenu(String username, String passwd, Clip clip, boolean music) throws SQLException, ClassNotFoundException {
         listaEquipo = cargarEquipoRival.cargarEquipo(username);
         this.musicOn = music;
+        this.user = username;
         initComponents();
         iniciar();
         initializeGUI();
@@ -308,9 +312,17 @@ public class initialMenu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Texto copiado al portapapeles.");
     }//GEN-LAST:event_userIDActionPerformed
 
-    private void buttonPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPCActionPerformed
+    private void buttonPCActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_buttonPCActionPerformed
         // TODO add your handling code here:
-        weAreWorking();
+        try {
+            new PokemonContainerGUI(listaEquipo,user).setVisible(true);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }//GEN-LAST:event_buttonPCActionPerformed
 
     private void buttonShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShopActionPerformed

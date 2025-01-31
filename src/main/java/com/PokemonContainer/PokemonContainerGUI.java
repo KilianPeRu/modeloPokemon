@@ -25,14 +25,23 @@ import javax.swing.*;
  * @author exosh
  */
 public class PokemonContainerGUI extends javax.swing.JFrame {
+    PCLoader pcl = new PCLoader();
     ArrayList<Pokemon> teamUser;
+    ArrayList<Pokemon> PCPokemon;
     Clip clip = AudioSystem.getClip();
+    String username;
     /**
      * Creates new form PokemonContainerGUI
      */
-    public PokemonContainerGUI(ArrayList<Pokemon> equipo) throws LineUnavailableException {
+    public PokemonContainerGUI(ArrayList<Pokemon> equipo, String name) throws LineUnavailableException, SQLException, ClassNotFoundException {
+        this.teamUser = equipo;
+        this.username = name;
+        this.PCPokemon = pcl.loadPC(name);
         initComponents();
-        teamUser = equipo;
+        iniciar();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -51,7 +60,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         userName = new javax.swing.JLabel();
         userID = new javax.swing.JButton();
         image = new javax.swing.JButton();
-        scrollPanel = new javax.swing.JScrollPane();
+        scrollPanel = generateScroller();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,11 +138,10 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
                     .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+        scrollPanel.setVisible(true);
+        jPanel1.add(scrollPanel, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(title, java.awt.BorderLayout.PAGE_START);
-
-        scrollPanel.setBackground(new java.awt.Color(102, 255, 255));
-        jPanel1.add(scrollPanel, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,9 +160,18 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciar() throws SQLException, ClassNotFoundException {
-        add(loadTeam(teamUser), BorderLayout.EAST);
+        jPanel1.add(loadTeam(teamUser), BorderLayout.EAST);
     }
-
+    public JScrollPane generateScroller() {
+        JScrollPane scroller = new JScrollPane();
+        try {
+            JPanel containerPanel = loadContainer(); // Cargar el panel con los botones
+            scroller.setViewportView(containerPanel); // Establecer el panel como viewportView
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return scroller;
+    }
     public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) throws SQLException, ClassNotFoundException {
         JPanel team = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -189,7 +206,29 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
 
         return team;
     }
+    public void dispose(){
 
+    }
+    public JPanel loadContainer() throws SQLException, ClassNotFoundException {
+        JPanel panel = new JPanel(new GridLayout(4,PCPokemon.size()/4,10,10));
+        for (int i = 0; i < PCPokemon.size(); i++) {
+            JButton bttn = new JButton();
+            bttn.setPreferredSize(new Dimension(200, 200));
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + PCPokemon.get(i).getEspecie().toLowerCase() + ".png");
+            Icon image = new ImageIcon(icon.getImage().getScaledInstance(200,200, Image.SCALE_DEFAULT));
+            bttn.setIcon(image);
+            bttn.setBorder(new RoundBorder(9));
+            bttn.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            panel.add(bttn);
+        }
+        return panel;
+    }
     private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
         // TODO add your handling code here:
         StringSelection seleccion = new StringSelection(userID.getText());
@@ -206,6 +245,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         System.out.println("This should start the change image profile.");
 
     }//GEN-LAST:event_imageActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton image;

@@ -16,9 +16,7 @@ public class PCLoader {
     private String rival;
     private Connection con;
     private boolean conectado;
-    public PCLoader(String usuario) {
-        this.userName = usuario;
-    }
+    public PCLoader() {}
 
     public void connect() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,12 +26,13 @@ public class PCLoader {
         con = DriverManager.getConnection(url, user, psswd);
         conectado = true;
     }
-    public ArrayList loadPC(String usuarioEquipo) throws SQLException, ClassNotFoundException {
+    public ArrayList<Pokemon> loadPC(String usuarioEquipo) throws SQLException, ClassNotFoundException {
         connect();
-        String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "' AND team = " + false;
+        ArrayList<Pokemon> CPUPokemons = new ArrayList<>();
+        String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "'" + " AND team = false";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        System.out.println("Cargando equipo de " + usuarioEquipo + ":");
+        System.out.println("Cargando caja de " + usuarioEquipo + ":");
         while (rs.next()) {
             int idPokemon = rs.getInt("idPokemon");
             String nombreTrainer = rs.getString("trainerName");
@@ -54,15 +53,15 @@ public class PCLoader {
             int m2 = rs.getInt("move2");
             int m3 = rs.getInt("move3");
             int m4 = rs.getInt("move4");
-            Pokemon p = new Pokemon(nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
+            Pokemon p = new Pokemon(idPokemon, nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
             System.out.println(p.getNombre()+"\n-----------------------");
             p.setMovimientos(cargarMovimientos(p));
             for (Movimiento m : p.getMovimientos()) {
                 System.out.println(m.getNombre());
             }
-            pokemonsPC.add(p);
+            CPUPokemons.add(p);
         }
-        return pokemonsPC;
+        return CPUPokemons;
     }
     public Movimiento[] cargarMovimientos(Pokemon p) throws SQLException, ClassNotFoundException {
         connect();
@@ -90,5 +89,22 @@ public class PCLoader {
             indice++;
         }
         return mov;
+    }
+
+    public void changeManager(Pokemon pEquipo, Pokemon pCaja) throws SQLException, ClassNotFoundException {
+        deleteManager(pEquipo);
+        addManager(pCaja);
+    }
+    public void deleteManager(Pokemon pEquipo) throws SQLException, ClassNotFoundException {
+        connect();
+        String query = "UPDATE FROM SET team = false Pokemon WHERE idPokemon = " + pEquipo.getIdPokemon();
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.executeUpdate();
+    }
+    public void addManager(Pokemon pCaja) throws SQLException, ClassNotFoundException {
+        connect();
+        String query = "UPDATE FROM SET team = true Pokemon WHERE idPokemon = " + pCaja.getIdPokemon();
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.executeUpdate();
     }
 }

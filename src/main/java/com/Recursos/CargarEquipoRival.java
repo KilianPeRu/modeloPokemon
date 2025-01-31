@@ -26,7 +26,7 @@ public class CargarEquipoRival {
 
     public ArrayList cargarEquipo(String usuarioEquipo) throws SQLException, ClassNotFoundException {
         connect();
-        String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "'";
+        String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "' AND team = true";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         System.out.println("Cargando equipo de " + usuarioEquipo + ":");
@@ -50,7 +50,7 @@ public class CargarEquipoRival {
             int m2 = rs.getInt("move2");
             int m3 = rs.getInt("move3");
             int m4 = rs.getInt("move4");
-            Pokemon p = new Pokemon(nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
+            Pokemon p = new Pokemon(idPokemon, nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
             System.out.println(p.getNombre()+"\n-----------------------");
             p.setMovimientos(cargarMovimiento(p));
             for (Movimiento m : p.getMovimientos()) {

@@ -12,6 +12,7 @@ import java.awt.*;
  * @author exosh
  */
 public class Pokemon {
+    int idPokemon;
     String nombre;
     String especie;
     Color colorType;
@@ -33,8 +34,9 @@ public class Pokemon {
     ImageIcon imagen;
     int nivel = 50;
     Movimiento[] movimientos = new Movimiento[4];
-    public Pokemon(String idTrainer, String nombre, String especie,String tipo1, String tipo2,
+    public Pokemon(int id,String idTrainer, String nombre, String especie,String tipo1, String tipo2,
                    String habilidad, String objeto,int hp, int atq, int def, int eat, int edf, int vel,int m1, int m2, int m3, int m4) {
+        this.idPokemon = id;
         this.idTrainer = idTrainer;
         this.nombre = nombre;
         this.especie = especie;
@@ -53,6 +55,14 @@ public class Pokemon {
         this.m3 = m3;
         this.m4 = m4;
         setColorType(tipo1);
+    }
+
+    public int getIdPokemon() {
+        return idPokemon;
+    }
+
+    public void setIdPokemon(int idPokemon) {
+        this.idPokemon = idPokemon;
     }
 
     public String getNombre() {
