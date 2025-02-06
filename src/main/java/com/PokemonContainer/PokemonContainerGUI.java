@@ -41,7 +41,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         iniciar();
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -212,6 +212,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
     public JPanel loadContainer() throws SQLException, ClassNotFoundException {
         JPanel panel = new JPanel(new GridLayout(4,PCPokemon.size()/4,10,10));
         for (int i = 0; i < PCPokemon.size(); i++) {
+            int indice = i;
             JButton bttn = new JButton();
             bttn.setPreferredSize(new Dimension(200, 200));
             ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + PCPokemon.get(i).getEspecie().toLowerCase() + ".png");
@@ -222,7 +223,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    new pokeComparator(PCPokemon.get(indice), teamUser);
                 }
             });
             panel.add(bttn);

@@ -4,17 +4,32 @@
  */
 package com.PokemonContainer;
 
+import com.BattleCPU.resources.Movimiento;
+import com.BattleCPU.resources.Pokemon;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 /**
  *
  * @author exosh
  */
 public class pokeComparator extends javax.swing.JFrame {
+    Pokemon pokeCaja;
+    Pokemon pokeComp;
 
     /**
      * Creates new form pokeComparator
      */
-    public pokeComparator() {
+    public pokeComparator(Pokemon pCaja, ArrayList<Pokemon> pEquipo) {
+        this.pokeCaja = pCaja;
+        this.pokeComp = pEquipo.getFirst();
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -26,10 +41,12 @@ public class pokeComparator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cardContainer = new JPanel(new CardLayout());
+        add(cardContainer, java.awt.BorderLayout.SOUTH);
         Splitter = new javax.swing.JPanel();
-        pCaja = new javax.swing.JPanel();
-        pEquipo = new javax.swing.JPanel();
-
+        pCaja = generatePokemon(pokeCaja);
+        pEquipo = generatePokemon(pokeComp);
+        cardContainer.setVisible(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout pCajaLayout = new javax.swing.GroupLayout(pCaja);
@@ -74,42 +91,62 @@ public class pokeComparator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public JPanel generatePokemon(Pokemon p){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        //Genera el top
+        panel.add(new JLabel(p.getNombre()), BorderLayout.NORTH);
+
+        //Genera la imagen
+        ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + p.getEspecie().toLowerCase() + ".png");
+        Icon image = new ImageIcon(icon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+        panel.add(new JLabel(image), BorderLayout.CENTER);
+
+        //Genera el panel inferior
+        JPanel panelMovimientos = new JPanel(new GridLayout(2, 2));
+        for (Movimiento m : p.getMovimientos()) {
+            cardContainer.add(generatePanelMove(m), m.getNombre());
+            JButton bttn = new JButton(m.getNombre());
+            bttn.addMouseMotionListener(new MouseAdapter() {
+                CardLayout cl = (CardLayout) cardContainer.getLayout();
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    cl.show(cardContainer, m.getNombre());
+                    cardContainer.setVisible(true);
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(pokeComparator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(pokeComparator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(pokeComparator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(pokeComparator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    cardContainer.setVisible(false);
+                }
+            });
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new pokeComparator().setVisible(true);
-            }
-        });
+        return panel;
     }
+    public JPanel generatePanelMove(Movimiento m){
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Potencia");
+        JLabel potencia = new JLabel(String.valueOf(m.getPoder()));
+        JLabel label1 = new JLabel("Precision");
+        JLabel precision = new JLabel(String.valueOf(m.getPrecision()));
+        JLabel label2 = new JLabel("Clase");
+        JLabel clase = new JLabel(String.valueOf(m.getClase()));
+        JLabel label3 = new JLabel("Tipo");
+        JLabel tipo = new JLabel(String.valueOf(m.getTipo()));
+        panel.add(label);
+        panel.add(potencia);
+        panel.add(label1);
+        panel.add(precision);
+        panel.add(label2);
+        panel.add(clase);
+        panel.add(label3);
+        panel.add(tipo);
 
+        panel.setBackground(m.getColorType());
+        return panel;
+    }
+    JPanel cardContainer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Splitter;
     private javax.swing.JPanel pCaja;
