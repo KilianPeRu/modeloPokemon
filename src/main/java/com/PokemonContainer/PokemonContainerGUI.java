@@ -41,7 +41,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         iniciar();
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -194,9 +194,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         new pokemonInterface(teamUser, teamUser.get(indice),clip);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
+                    } catch (SQLException | ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
@@ -205,9 +203,6 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         }
 
         return team;
-    }
-    public void dispose(){
-
     }
     public JPanel loadContainer() throws SQLException, ClassNotFoundException {
         JPanel panel = new JPanel(new GridLayout(4,PCPokemon.size()/4,10,10));

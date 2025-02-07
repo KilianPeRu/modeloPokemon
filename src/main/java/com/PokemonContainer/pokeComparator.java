@@ -43,33 +43,17 @@ public class pokeComparator extends javax.swing.JFrame {
 
         cardContainer = new JPanel(new CardLayout());
         add(cardContainer, java.awt.BorderLayout.SOUTH);
-        Splitter = new javax.swing.JPanel();
+        Splitter = new JPanel(new GridLayout(1, 2, 10, 10));
         pCaja = generatePokemon(pokeCaja);
         pEquipo = generatePokemon(pokeComp);
         cardContainer.setVisible(false);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        pCaja.setPreferredSize(new Dimension(380, 484));
+        pEquipo.setPreferredSize(new Dimension(380, 484));
+        Splitter.add(pCaja);
+        Splitter.add(pEquipo);
 
-        javax.swing.GroupLayout pCajaLayout = new javax.swing.GroupLayout(pCaja);
-        pCaja.setLayout(pCajaLayout);
-        pCajaLayout.setHorizontalGroup(
-            pCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        pCajaLayout.setVerticalGroup(
-            pCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout pEquipoLayout = new javax.swing.GroupLayout(pEquipo);
-        pEquipo.setLayout(pEquipoLayout);
-        pEquipoLayout.setHorizontalGroup(
-            pEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        pEquipoLayout.setVerticalGroup(
-            pEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        getContentPane().add(Splitter, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout SplitterLayout = new javax.swing.GroupLayout(Splitter);
         Splitter.setLayout(SplitterLayout);
@@ -86,10 +70,8 @@ public class pokeComparator extends javax.swing.JFrame {
             .addComponent(pCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        getContentPane().add(Splitter, java.awt.BorderLayout.CENTER);
-
-        pack();
+        revalidate();
+        repaint();
     }// </editor-fold>//GEN-END:initComponents
     public JPanel generatePokemon(Pokemon p){
         JPanel panel = new JPanel();
@@ -108,19 +90,26 @@ public class pokeComparator extends javax.swing.JFrame {
         for (Movimiento m : p.getMovimientos()) {
             cardContainer.add(generatePanelMove(m), m.getNombre());
             JButton bttn = new JButton(m.getNombre());
-            bttn.addMouseMotionListener(new MouseAdapter() {
-                CardLayout cl = (CardLayout) cardContainer.getLayout();
+            CardLayout cl = (CardLayout) cardContainer.getLayout();
+            bttn.addActionListener(e -> {
+                cl.show(cardContainer, m.getNombre());
+                cardContainer.setVisible(true);
+            });
+            bttn.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                public void mouseEntered(MouseEvent e) {
                     cl.show(cardContainer, m.getNombre());
                     cardContainer.setVisible(true);
                 }
+
                 @Override
-                public void mouseExited(java.awt.event.MouseEvent evt) {
+                public void mouseExited(MouseEvent e) {
                     cardContainer.setVisible(false);
                 }
             });
+            panelMovimientos.add(bttn);
         }
+        panel.add(panelMovimientos, BorderLayout.SOUTH);
 
         return panel;
     }
