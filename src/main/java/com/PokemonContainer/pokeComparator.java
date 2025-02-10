@@ -6,11 +6,18 @@ package com.PokemonContainer;
 
 import com.BattleCPU.resources.Movimiento;
 import com.BattleCPU.resources.Pokemon;
+import com.Recursos.CargarEquipoRival;
+import com.Recursos.Modifiers.RoundBorder;
+import com.Recursos.reusableCode.pokemonInterface;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,14 +27,20 @@ import java.util.ArrayList;
 public class pokeComparator extends javax.swing.JFrame {
     Pokemon pokeCaja;
     Pokemon pokeComp;
+    ArrayList<Pokemon> pokeList;
+    String username;
 
     /**
      * Creates new form pokeComparator
      */
-    public pokeComparator(Pokemon pCaja, ArrayList<Pokemon> pEquipo) {
+    public pokeComparator(String username, Pokemon pCaja, ArrayList<Pokemon> pEquipo) throws SQLException, ClassNotFoundException {
         this.pokeCaja = pCaja;
         this.pokeComp = pEquipo.getFirst();
+        this.pokeList = pEquipo;
+        this.username = username;
         initComponents();
+        pack();
+        setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -39,40 +52,87 @@ public class pokeComparator extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws SQLException, ClassNotFoundException {
+        // Crear un JPanel principal con márgenes
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         cardContainer = new JPanel(new CardLayout());
-        add(cardContainer, java.awt.BorderLayout.SOUTH);
+        cardContainer.setBorder(new EmptyBorder(0, 0, 10, 0));
+        mainPanel.add(cardContainer, java.awt.BorderLayout.SOUTH);
+
         Splitter = new JPanel(new GridLayout(1, 2, 10, 10));
         pCaja = generatePokemon(pokeCaja);
         pEquipo = generatePokemon(pokeComp);
+        mainPanel.add(buttonManager(), BorderLayout.NORTH);
+
+        equipo = loadTeam(pokeList);
+        equipo.setBorder(new EmptyBorder(0, 10, 10, 0));
+        equipo.setPreferredSize(new Dimension(95, this.equipo.getHeight()));
+        equipo.setMinimumSize(new Dimension(95, this.equipo.getHeight()));
+
         cardContainer.setVisible(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         pCaja.setPreferredSize(new Dimension(380, 484));
         pEquipo.setPreferredSize(new Dimension(380, 484));
+
         Splitter.add(pCaja);
         Splitter.add(pEquipo);
+        mainPanel.add(equipo, java.awt.BorderLayout.EAST);
 
-        getContentPane().add(Splitter, java.awt.BorderLayout.CENTER);
+        // Agregar el Splitter al centro del mainPanel
+        mainPanel.add(Splitter, java.awt.BorderLayout.CENTER);
+
+        // Configurar el JFrame
+        setPreferredSize(new Dimension(950, 700));
+        getContentPane().add(mainPanel); // Agregar el mainPanel al JFrame
 
         javax.swing.GroupLayout SplitterLayout = new javax.swing.GroupLayout(Splitter);
         Splitter.setLayout(SplitterLayout);
         SplitterLayout.setHorizontalGroup(
-            SplitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SplitterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(pCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                SplitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SplitterLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(pEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addComponent(pCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         SplitterLayout.setVerticalGroup(
-            SplitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                SplitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        revalidate();
-        repaint();
-    }// </editor-fold>//GEN-END:initComponents
+    }
+    public JPanel buttonManager(){
+        PCLoader loader = new PCLoader();
+        CargarEquipoRival c = new CargarEquipoRival();
+        JPanel panel = new JPanel();
+        JButton bttnCambiar = new JButton("Cambiar");
+        bttnCambiar.setBackground(new Color(111, 255, 111));
+        bttnCambiar.setBorder(new RoundBorder(9));
+        bttnCambiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    loader.changeManager(pokeComp,pokeCaja);
+                    pokeList = c.cargarEquipo(username);
+                    equipo.removeAll();
+                    equipo.add(loadTeam(pokeList));
+                    equipo.revalidate();
+                    equipo.repaint();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        JButton bttnRelease = new JButton("Liberar Pokemon");
+        bttnRelease.setBackground(new Color(255, 111, 111));
+        bttnRelease.setBorder(new RoundBorder(9));
+        panel.add(bttnCambiar);
+        panel.add(bttnRelease);
+        return panel;
+    }
     public JPanel generatePokemon(Pokemon p){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -91,10 +151,6 @@ public class pokeComparator extends javax.swing.JFrame {
             cardContainer.add(generatePanelMove(m), m.getNombre());
             JButton bttn = new JButton(m.getNombre());
             CardLayout cl = (CardLayout) cardContainer.getLayout();
-            bttn.addActionListener(e -> {
-                cl.show(cardContainer, m.getNombre());
-                cardContainer.setVisible(true);
-            });
             bttn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -135,10 +191,49 @@ public class pokeComparator extends javax.swing.JFrame {
         panel.setBackground(m.getColorType());
         return panel;
     }
+    public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) throws SQLException, ClassNotFoundException {
+        JPanel team = new JPanel(new GridLayout(equipoPokemon.size(), 1, 10, 10));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 10, 5, 5); // 5px de padding en todos los lados
+
+        for (int i = 0; i < equipoPokemon.size(); i++) {
+            int indice = i;
+            gbc.gridx = 0; // Mantenemos la columna en 0
+            gbc.gridy = i; // Incrementamos la fila para cada Pokémon
+
+            JButton bttn = new JButton();
+            bttn.setPreferredSize(new Dimension(100, Splitter.getHeight() / equipoPokemon.size() - 10));
+            ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + equipoPokemon.get(i).getEspecie().toLowerCase() + ".png");
+            Icon image = new ImageIcon(icon.getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
+            bttn.setIcon(image);
+            bttn.setBorder(new RoundBorder(9));
+            bttn.setBorder(BorderFactory.createCompoundBorder(new RoundBorder(9), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+            bttn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pCaja.removeAll();
+                    pEquipo.removeAll();
+                    pokeComp = equipoPokemon.get(indice);
+                    pCaja.add(generatePokemon(pokeCaja));
+                    pEquipo.add(generatePokemon(pokeComp));
+                    pCaja.revalidate();
+                    pCaja.repaint();
+                    pEquipo.revalidate();
+                    pEquipo.repaint();
+                    Splitter.revalidate();
+                    Splitter.repaint();
+                }
+            });
+            team.add(bttn);
+        }
+
+        return team;
+    }
     JPanel cardContainer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Splitter;
     private javax.swing.JPanel pCaja;
     private javax.swing.JPanel pEquipo;
+    private JPanel equipo;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,7 +32,7 @@ public class PCLoader {
         String query = "SELECT * FROM Pokemon WHERE trainerName like " + "'" + usuarioEquipo + "'" + " AND team = false";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        System.out.println("Cargando caja de " + usuarioEquipo + ":");
+        System.out.println("Cargando caja de " + usuarioEquipo + "...");
         while (rs.next()) {
             int idPokemon = rs.getInt("idPokemon");
             String nombreTrainer = rs.getString("trainerName");
@@ -54,13 +54,10 @@ public class PCLoader {
             int m3 = rs.getInt("move3");
             int m4 = rs.getInt("move4");
             Pokemon p = new Pokemon(idPokemon, nombreTrainer, nombre, especie, tipo1, tipo2, null, null, hp, atk, def, eat, edf, vel, m1, m2, m3, m4);
-            System.out.println(p.getNombre()+"\n-----------------------");
             p.setMovimientos(cargarMovimientos(p));
-            for (Movimiento m : p.getMovimientos()) {
-                System.out.println(m.getNombre());
-            }
             CPUPokemons.add(p);
         }
+        System.out.println("Pokemons cargados!");
         return CPUPokemons;
     }
     public Movimiento[] cargarMovimientos(Pokemon p) throws SQLException, ClassNotFoundException {
@@ -97,13 +94,13 @@ public class PCLoader {
     }
     public void deleteManager(Pokemon pEquipo) throws SQLException, ClassNotFoundException {
         connect();
-        String query = "UPDATE FROM SET team = false Pokemon WHERE idPokemon = " + pEquipo.getIdPokemon();
+        String query = "UPDATE Pokemon SET team = false WHERE idPokemon = " + pEquipo.getIdPokemon();
         PreparedStatement ps = con.prepareStatement(query);
         ps.executeUpdate();
     }
     public void addManager(Pokemon pCaja) throws SQLException, ClassNotFoundException {
         connect();
-        String query = "UPDATE FROM SET team = true Pokemon WHERE idPokemon = " + pCaja.getIdPokemon();
+        String query = "UPDATE Pokemon SET team = true WHERE idPokemon = " + pCaja.getIdPokemon();
         PreparedStatement ps = con.prepareStatement(query);
         ps.executeUpdate();
     }

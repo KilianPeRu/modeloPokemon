@@ -89,8 +89,6 @@ public class LogIn extends JFrame {
         user.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         user.setText("Usuario:");
 
-        userField.setText("Usuario");
-
         passwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         passwd.setText("Contraseña:");
 
@@ -114,8 +112,6 @@ public class LogIn extends JFrame {
                 registrarActionPerformed(evt);
             }
         });
-
-        passwdField.setText("Contraseña");
 
         javax.swing.GroupLayout logContainerLayout = new javax.swing.GroupLayout(logContainer);
         logContainer.setLayout(logContainerLayout);

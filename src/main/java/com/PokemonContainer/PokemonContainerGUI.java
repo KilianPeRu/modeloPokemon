@@ -40,7 +40,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         initComponents();
         iniciar();
         setLocationRelativeTo(null);
-        setResizable(false);
+        //setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -152,7 +152,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -218,7 +218,13 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new pokeComparator(PCPokemon.get(indice), teamUser);
+                    try {
+                        new pokeComparator(username,PCPokemon.get(indice), teamUser);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
             panel.add(bttn);
