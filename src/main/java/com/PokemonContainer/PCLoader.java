@@ -89,8 +89,10 @@ public class PCLoader {
     }
 
     public void changeManager(Pokemon pEquipo, Pokemon pCaja) throws SQLException, ClassNotFoundException {
+        System.out.println("Cambiando " + pEquipo.getNombre() + " por " + pCaja.getNombre() + " ...");
         deleteManager(pEquipo);
         addManager(pCaja);
+        System.out.println("Cambio realizado!");
     }
     public void deleteManager(Pokemon pEquipo) throws SQLException, ClassNotFoundException {
         connect();

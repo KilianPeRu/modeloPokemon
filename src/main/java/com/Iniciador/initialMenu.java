@@ -38,7 +38,7 @@ public class initialMenu extends javax.swing.JFrame {
     /**
      * Creates new form initialMenu
      */
-    public initialMenu(String username, String passwd, Clip clip, boolean music) throws SQLException, ClassNotFoundException {
+    public initialMenu(String username, Clip clip, boolean music) throws SQLException, ClassNotFoundException {
         listaEquipo = cargarEquipoRival.cargarEquipo(username);
         this.musicOn = music;
         this.user = username;
@@ -316,6 +316,7 @@ public class initialMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             new PokemonContainerGUI(listaEquipo,user).setVisible(true);
+            dispose();
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {

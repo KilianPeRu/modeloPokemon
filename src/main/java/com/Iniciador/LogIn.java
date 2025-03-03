@@ -366,7 +366,7 @@ public class LogIn extends JFrame {
 
         if (authenticateUser(username, password)) {
             JOptionPane.showMessageDialog(panel, "Login exitoso!");
-            new initialMenu(username, password, clip, musicOn).setLocationRelativeTo(null);
+            new initialMenu(username, clip, musicOn).setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(panel, "Usuario o contraseña incorrectos.");

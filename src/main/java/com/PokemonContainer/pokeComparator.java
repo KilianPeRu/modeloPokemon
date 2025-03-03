@@ -10,13 +10,11 @@ import com.Recursos.CargarEquipoRival;
 import com.Recursos.Modifiers.RoundBorder;
 import com.Recursos.reusableCode.pokemonInterface;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -43,6 +41,21 @@ public class pokeComparator extends javax.swing.JFrame {
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    new PokemonContainerGUI(pokeList,username).setVisible(true);
+                } catch (LineUnavailableException ex) {
+                    throw new RuntimeException(ex);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     /**
@@ -54,7 +67,7 @@ public class pokeComparator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() throws SQLException, ClassNotFoundException {
         // Crear un JPanel principal con márgenes
-        JPanel mainPanel = new JPanel(new BorderLayout());
+
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         cardContainer = new JPanel(new CardLayout());
@@ -69,7 +82,7 @@ public class pokeComparator extends javax.swing.JFrame {
         equipo = loadTeam(pokeList);
         equipo.setBorder(new EmptyBorder(0, 10, 10, 0));
         equipo.setPreferredSize(new Dimension(95, this.equipo.getHeight()));
-        equipo.setMinimumSize(new Dimension(95, this.equipo.getHeight()));
+        equipo.setMinimumSize(new Dimension(95, this.equipo.getHeight() ));
 
         cardContainer.setVisible(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -108,6 +121,9 @@ public class pokeComparator extends javax.swing.JFrame {
         PCLoader loader = new PCLoader();
         CargarEquipoRival c = new CargarEquipoRival();
         JPanel panel = new JPanel();
+        /**
+         * Cambiar Pokemon
+         */
         JButton bttnCambiar = new JButton("Cambiar");
         bttnCambiar.setBackground(new Color(111, 255, 111));
         bttnCambiar.setBorder(new RoundBorder(9));
@@ -115,11 +131,25 @@ public class pokeComparator extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     loader.changeManager(pokeComp,pokeCaja);
+
+                    pokeList.clear();
                     pokeList = c.cargarEquipo(username);
-                    equipo.removeAll();
-                    equipo.add(loadTeam(pokeList));
-                    equipo.revalidate();
-                    equipo.repaint();
+
+                    mainPanel.remove(equipo);
+                    pCaja.removeAll();
+                    pEquipo.removeAll();
+                    Pokemon pAux = pokeComp;
+                    pokeComp = pokeCaja;
+                    pokeCaja = pAux;
+
+                    pCaja.add(generatePokemon(pokeCaja));
+                    pEquipo.add(generatePokemon(pokeComp));
+
+                    JPanel panelAux = loadTeam(pokeList);
+                    mainPanel.add(panelAux, BorderLayout.EAST);
+                    mainPanel.revalidate();
+                    mainPanel.repaint();
+
                 } catch (SQLException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -193,16 +223,16 @@ public class pokeComparator extends javax.swing.JFrame {
     }
     public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) throws SQLException, ClassNotFoundException {
         JPanel team = new JPanel(new GridLayout(equipoPokemon.size(), 1, 10, 10));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 10, 5, 5); // 5px de padding en todos los lados
+        /*GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 10, 5, 5);*/
 
         for (int i = 0; i < equipoPokemon.size(); i++) {
             int indice = i;
-            gbc.gridx = 0; // Mantenemos la columna en 0
-            gbc.gridy = i; // Incrementamos la fila para cada Pokémon
+            //gbc.gridx = 0;
+            //gbc.gridy = i;
 
             JButton bttn = new JButton();
-            bttn.setPreferredSize(new Dimension(100, Splitter.getHeight() / equipoPokemon.size() - 10));
+            bttn.setPreferredSize(new Dimension(100, this.getHeight() / equipoPokemon.size() - 10));
             ImageIcon icon = new ImageIcon("src/main/java/com/Recursos/pokemonImages/" + equipoPokemon.get(i).getEspecie().toLowerCase() + ".png");
             Icon image = new ImageIcon(icon.getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
             bttn.setIcon(image);
@@ -235,5 +265,6 @@ public class pokeComparator extends javax.swing.JFrame {
     private javax.swing.JPanel pCaja;
     private javax.swing.JPanel pEquipo;
     private JPanel equipo;
+    private JPanel mainPanel = new JPanel(new BorderLayout());
     // End of variables declaration//GEN-END:variables
 }
