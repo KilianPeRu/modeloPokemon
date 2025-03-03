@@ -33,6 +33,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
     ArrayList<Pokemon> PCPokemon;
     Clip clip = AudioSystem.getClip();
     String username;
+
     /**
      * Creates new form PokemonContainerGUI
      */
