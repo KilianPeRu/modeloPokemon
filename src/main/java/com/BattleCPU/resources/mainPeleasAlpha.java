@@ -1,10 +1,14 @@
 package com.BattleCPU.resources;
 
+import com.Iniciador.initialMenu;
 import com.Recursos.CargarEquipoRival;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -22,23 +26,41 @@ public class mainPeleasAlpha {
     Pokemon pCPU; // Pokemon que usa la CPU en este momento
     JProgressBar barrap1; // Barra de vida Usuario
     JProgressBar barrap2; // Barra de vida de la CPU
+    String username;
+    Clip musica;
+    JFrame frame;
 
-    public mainPeleasAlpha() throws SQLException, ClassNotFoundException {
+    public mainPeleasAlpha(String username, Clip clip) throws SQLException, ClassNotFoundException {
+        this.username = username;
+        this.musica = clip;
         // Empezamos la aplicacion y hacemos el JFrame que lo almacena
         gameStart();
-        JFrame frame = new JFrame("Alpha Battle");
+        frame = new JFrame("Alpha Battle");
         frame.add(initComponents());
         frame.setVisible(true);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    new initialMenu(username,clip,false).setVisible(true);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
     }
 
     public void gameStart() throws SQLException, ClassNotFoundException {
         //Inicializan las variables
-        teamUser = crUser.cargarEquipo("betabot3");// Carga el equipo del Usuario
-        teamCPU = crCPU.cargarEquipo("betabot1");//Carga el equipo de la CPU
+        teamUser = crUser.cargarEquipo(username);// Carga el equipo del Usuario
+        teamCPU = crCPU.cargarEquipo("betabot"+((int) (Math.random() * 3) + 1));//Carga el equipo de la CPU
         hpEquipo = baseHPTeam(teamUser); // Settea la vida de los pokemon y las almacena para su posterior uso
         pActual = teamUser.get(0); // Empieza la batalla siendo el pokemon en uso el primero que hay en el equipo
         pCPU = teamCPU.get(0); // Empieza la batalla con el primer pokemon de la CPU
@@ -186,7 +208,14 @@ public class mainPeleasAlpha {
                 );
 
                 if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                    System.exit(1);
+                    try {
+                        new initialMenu(username,musica,false);
+                        frame.dispose();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             return true;
@@ -206,9 +235,21 @@ public class mainPeleasAlpha {
             }
             //Si no tienes pokemon vivos te muestra el mensaje de que has perdido y cierra la aplicacion
             if (pokemonVivos.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "¡El CPU ha ganado la batalla! Todos tus Pokémon han sido debilitados.",
-                        "FIN", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
+                int option = JOptionPane.showOptionDialog(null, "El CPU ha ganado el combate no te quedan Pokemon.",
+                        "FIN", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                        new Object[]{"OK"}, "OK"
+                );
+
+                if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                    try {
+                        new initialMenu(username,musica,false);
+                        frame.dispose();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
             //En caso de que nos queden algun Pokemon vivo nos enseñará una ventana con cual de estos Pokemon querremos usar
             String[] opcionesPokemon = pokemonVivos.stream().map(Pokemon::getNombre).toArray(String[]::new);

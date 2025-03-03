@@ -343,7 +343,7 @@ public class initialMenu extends javax.swing.JFrame {
 
     private void buttonCPUActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_buttonCPUActionPerformed
         // TODO add your handling code here:
-        new mainPeleasAlpha();
+        new mainPeleasAlpha(user,musica);
         dispose();
     }//GEN-LAST:event_buttonCPUActionPerformed
 
