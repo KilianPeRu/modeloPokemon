@@ -42,7 +42,7 @@ public class PokemonShop extends JFrame {
     public PokemonShop(ArrayList<Pokemon> equipo, String name) throws LineUnavailableException, SQLException, ClassNotFoundException {
         this.teamUser = equipo;
         this.username = name;
-        this.PCPokemon = pcl.loadPC(name);
+        this.PCPokemon = pcl.loadPC("shop");
         initComponents();
         iniciar();
         setLocationRelativeTo(null);

@@ -10,6 +10,7 @@ import com.Recursos.CargarEquipoRival;
 import com.BattleCPU.resources.Pokemon;
 import com.BattleCPU.resources.mainPeleasAlpha;
 import com.Recursos.Modifiers.RoundBorder;
+import com.Tienda.PokemonShop;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
@@ -317,18 +318,19 @@ public class initialMenu extends javax.swing.JFrame {
         try {
             new PokemonContainerGUI(listaEquipo,user).setVisible(true);
             dispose();
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (LineUnavailableException | ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_buttonPCActionPerformed
 
     private void buttonShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShopActionPerformed
         // TODO add your handling code here:
-        weAreWorking();
+        try {
+            new PokemonShop(listaEquipo,user).setVisible(true);
+        } catch (LineUnavailableException | SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        dispose();
     }//GEN-LAST:event_buttonShopActionPerformed
 
     private void buttonChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChatActionPerformed
