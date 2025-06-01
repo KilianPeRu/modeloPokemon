@@ -27,15 +27,17 @@ public class pokeComparator extends javax.swing.JFrame {
     Pokemon pokeComp;
     ArrayList<Pokemon> pokeList;
     String username;
+    String id;
 
     /**
      * Creates new form pokeComparator
      */
-    public pokeComparator(String username, Pokemon pCaja, ArrayList<Pokemon> pEquipo) throws SQLException, ClassNotFoundException {
+    public pokeComparator(String username, Pokemon pCaja, ArrayList<Pokemon> pEquipo, String id) throws SQLException, ClassNotFoundException {
         this.pokeCaja = pCaja;
         this.pokeComp = pEquipo.getFirst();
         this.pokeList = pEquipo;
         this.username = username;
+        this.id = id;
         initComponents();
         pack();
         setResizable(false);
@@ -46,7 +48,7 @@ public class pokeComparator extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    new PokemonContainerGUI(pokeList,username).setVisible(true);
+                    new PokemonContainerGUI(pokeList,username, id).setVisible(true);
                 } catch (LineUnavailableException ex) {
                     throw new RuntimeException(ex);
                 } catch (SQLException ex) {

@@ -35,14 +35,16 @@ public class PokemonShop extends JFrame {
     ArrayList<Pokemon> PCPokemon;
     Clip clip = AudioSystem.getClip();
     String username;
+    String id;
 
     /**
      * Creates new form PokemonContainerGUI
      */
-    public PokemonShop(ArrayList<Pokemon> equipo, String name) throws LineUnavailableException, SQLException, ClassNotFoundException {
+    public PokemonShop(ArrayList<Pokemon> equipo, String name, String id) throws LineUnavailableException, SQLException, ClassNotFoundException {
         this.teamUser = equipo;
         this.username = name;
         this.PCPokemon = pcl.loadPC("shop");
+        this.id = id;
         initComponents();
         iniciar();
         setLocationRelativeTo(null);
@@ -52,7 +54,7 @@ public class PokemonShop extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    new initialMenu(username,clip,false).setVisible(true);
+                    new initialMenu(username,clip,false, id).setVisible(true);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (ClassNotFoundException ex) {
@@ -237,7 +239,7 @@ public class PokemonShop extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        new pokeComparator(username,PCPokemon.get(indice), teamUser);
+                        new pokeComparator(username,PCPokemon.get(indice), teamUser, id);
                         dispose();
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);

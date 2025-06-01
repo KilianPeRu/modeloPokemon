@@ -33,11 +33,13 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
     ArrayList<Pokemon> PCPokemon;
     Clip clip = AudioSystem.getClip();
     String username;
+    String id;
 
     /**
      * Creates new form PokemonContainerGUI
      */
-    public PokemonContainerGUI(ArrayList<Pokemon> equipo, String name) throws LineUnavailableException, SQLException, ClassNotFoundException {
+    public PokemonContainerGUI(ArrayList<Pokemon> equipo, String name, String id) throws LineUnavailableException, SQLException, ClassNotFoundException {
+        this.id = id;
         this.teamUser = equipo;
         this.username = name;
         this.PCPokemon = pcl.loadPC(name);
@@ -50,7 +52,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    new initialMenu(username,clip,false).setVisible(true);
+                    new initialMenu(username,clip,false, id).setVisible(true);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (ClassNotFoundException ex) {
@@ -235,7 +237,7 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        new pokeComparator(username,PCPokemon.get(indice), teamUser);
+                        new pokeComparator(username,PCPokemon.get(indice), teamUser, id);
                         dispose();
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);

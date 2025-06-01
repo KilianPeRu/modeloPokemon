@@ -22,7 +22,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -36,18 +36,21 @@ public class initialMenu extends javax.swing.JFrame {
     Clip musica;
     boolean musicOn;
     String user;
+    String id;
     /**
      * Creates new form initialMenu
      */
-    public initialMenu(String username, Clip clip, boolean music) throws SQLException, ClassNotFoundException {
+    public initialMenu(String username, Clip clip, boolean music, String id) throws SQLException, ClassNotFoundException {
         listaEquipo = cargarEquipoRival.cargarEquipo(username);
         this.musicOn = music;
         this.user = username;
+        this.musica = clip;
+        this.id = id;
+        System.out.println("ID USER: " + id);
         initComponents();
         iniciar();
         initializeGUI();
         setVisible(true);
-        this.musica = clip;
     }
 
 
@@ -262,6 +265,8 @@ public class initialMenu extends javax.swing.JFrame {
         }
         equipo = loadTeam(listaEquipo);
         add(equipo, BorderLayout.EAST);
+        userName.setText(user);
+        userID.setText(id);
     }
     public JPanel loadTeam(ArrayList<Pokemon> equipoPokemon) throws SQLException, ClassNotFoundException {
         JPanel team = new JPanel(new GridBagLayout());
@@ -316,7 +321,7 @@ public class initialMenu extends javax.swing.JFrame {
     private void buttonPCActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_buttonPCActionPerformed
         // TODO add your handling code here:
         try {
-            new PokemonContainerGUI(listaEquipo,user).setVisible(true);
+            new PokemonContainerGUI(listaEquipo,user, id).setVisible(true);
             dispose();
         } catch (LineUnavailableException | ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -326,7 +331,7 @@ public class initialMenu extends javax.swing.JFrame {
     private void buttonShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShopActionPerformed
         // TODO add your handling code here:
         try {
-            new PokemonShop(listaEquipo,user).setVisible(true);
+            new PokemonShop(listaEquipo,user, id).setVisible(true);
         } catch (LineUnavailableException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -345,7 +350,7 @@ public class initialMenu extends javax.swing.JFrame {
 
     private void buttonCPUActionPerformed(java.awt.event.ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_buttonCPUActionPerformed
         // TODO add your handling code here:
-        new mainPeleasAlpha(user,musica);
+        new mainPeleasAlpha(user,musica, id);
         dispose();
     }//GEN-LAST:event_buttonCPUActionPerformed
 

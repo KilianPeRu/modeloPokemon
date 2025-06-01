@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 
 public class mainPeleasAlpha {
+    String id;
     // Iniciando variables necesarias para la aplicacion
     CargarEquipoRival crCPU = new CargarEquipoRival(); // Recurso de carga para equipo de la CPU
     CargarEquipoRival crUser = new CargarEquipoRival(); // Recurso de carga de nuestro Equipo
@@ -30,7 +31,8 @@ public class mainPeleasAlpha {
     Clip musica;
     JFrame frame;
 
-    public mainPeleasAlpha(String username, Clip clip) throws SQLException, ClassNotFoundException {
+    public mainPeleasAlpha(String username, Clip clip, String id) throws SQLException, ClassNotFoundException {
+        this.id = id;
         this.username = username;
         this.musica = clip;
         // Empezamos la aplicacion y hacemos el JFrame que lo almacena
@@ -46,7 +48,7 @@ public class mainPeleasAlpha {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    new initialMenu(username,clip,false).setVisible(true);
+                    new initialMenu(username,clip,false, id).setVisible(true);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (ClassNotFoundException ex) {
@@ -209,7 +211,7 @@ public class mainPeleasAlpha {
 
                 if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
                     try {
-                        new initialMenu(username,musica,false);
+                        new initialMenu(username,musica,false, id);
                         frame.dispose();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -242,7 +244,7 @@ public class mainPeleasAlpha {
 
                 if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
                     try {
-                        new initialMenu(username,musica,false);
+                        new initialMenu(username,musica,false, id);
                         frame.dispose();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);

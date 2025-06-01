@@ -30,6 +30,7 @@ public class LogIn extends JFrame {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/Javamon";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
+    String id;
     Clip clip;
     boolean musicOn = true;
 
@@ -363,8 +364,9 @@ public class LogIn extends JFrame {
         networkManager n = new networkManager(username);
         if (authenticateUser(username, password)) {
             JOptionPane.showMessageDialog(panel, "Login exitoso!");
-            new initialMenu(username, clip, musicOn).setLocationRelativeTo(null);
+            new initialMenu(username, clip, musicOn, id).setLocationRelativeTo(null);
             n.updateIp();
+            System.out.println("ID USER: " +id);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(panel, "Usuario o contraseña incorrectos.");
@@ -375,20 +377,27 @@ public class LogIn extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_settingsActionPerformed
 
-    private static boolean authenticateUser(String username, String password) {
+    private boolean authenticateUser(String username, String password) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String query = "SELECT * FROM users WHERE name = ? AND passwd = ?";
+            String query = "SELECT idUsuario FROM users WHERE name = ? AND passwd = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
             stmt.setString(2, password);
 
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+
+            if (rs.next()) {
+                id = rs.getString("idUsuario");
+                return true;
+            }
+            return false;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
     private static boolean registerUser(String username, String password) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {

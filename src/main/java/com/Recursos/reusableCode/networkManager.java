@@ -22,8 +22,9 @@ public class networkManager {
     private String trainerName;
 
     //Constructor de la clase
-    public networkManager(String trainerName) throws UnknownHostException {
+    public networkManager(String trainerName) throws UnknownHostException, SQLException, ClassNotFoundException {
         this.trainerName = trainerName;
+        connect();
     }
 
     //Función que se encarga de conectar a la base de datos
@@ -69,7 +70,7 @@ public class networkManager {
     }
     //Función que se encarga de obtener la dirección IP de la bbdd
     public static String getIpBBDD(String trainerName) throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM user WHERE trainerName like " + "'" + trainerName + "'";
+        String query = "SELECT * FROM users WHERE name like " + "'" + trainerName + "'";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         System.out.println("Recibiendo IP...");
@@ -82,9 +83,9 @@ public class networkManager {
     }
     //Función que se encarga de enviar la información a la base de datos
     public void sendPort(String trainerName) throws SQLException, ClassNotFoundException {
-        String query = "UPDATE user SET ip = " + "'" + ip + "'" + " WHERE trainerName like " + "'" + trainerName + "'";
+        String query = "UPDATE users SET ip = " + "'" + ip + "'" + " WHERE name like " + "'" + trainerName + "'";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.executeQuery();
+        ps.executeUpdate();
         System.out.println("Enviando IP...");
     }
 }
