@@ -48,7 +48,9 @@ public class networkManager {
     public void updateIp() throws SQLException, ClassNotFoundException {
         if(!ip.equals(getIpBBDD(trainerName))){
             sendPort(trainerName);
+            System.out.println("IP actualizada!");
         }else{
+            System.out.println("IP es la misma que la actual! No se actualizó nada.");
             disconnect();
         }
     }
@@ -82,7 +84,7 @@ public class networkManager {
     public void sendPort(String trainerName) throws SQLException, ClassNotFoundException {
         String query = "UPDATE user SET ip = " + "'" + ip + "'" + " WHERE trainerName like " + "'" + trainerName + "'";
         PreparedStatement ps = con.prepareStatement(query);
-        ResultSet rs = ps.executeQuery();
-        System.out.println("Recibiendo IP...");
+        ps.executeQuery();
+        System.out.println("Enviando IP...");
     }
 }

@@ -4,16 +4,16 @@
 package com.Iniciador;
 
 import com.Recursos.Modifiers.RoundBorder;
+import com.Recursos.reusableCode.networkManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,7 +27,6 @@ import javax.swing.border.EmptyBorder;
  * @author exosh
  */
 public class LogIn extends JFrame {
-
     private static final String DB_URL = "jdbc:mysql://localhost:3306/Javamon";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
@@ -97,9 +96,7 @@ public class LogIn extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     iniciarSesionActionPerformed(evt);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (SQLException | UnknownHostException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -290,7 +287,7 @@ public class LogIn extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         iniciarSesionActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "EnterKeyPressed"));
-                    } catch (SQLException | ClassNotFoundException ex) {
+                    } catch (SQLException | ClassNotFoundException | UnknownHostException ex) {
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(panel, "Ocurrió un error al iniciar sesión.");
                     }
@@ -359,14 +356,15 @@ public class LogIn extends JFrame {
         }
         return clip;
     }
-    private void iniciarSesionActionPerformed(ActionEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_iniciarSesionActionPerformed
+    private void iniciarSesionActionPerformed(ActionEvent evt) throws SQLException, ClassNotFoundException, UnknownHostException {//GEN-FIRST:event_iniciarSesionActionPerformed
         // TODO add your handling code here:
         String username = userField.getText();
         String password = new String(passwdField.getPassword());
-
+        networkManager n = new networkManager(username);
         if (authenticateUser(username, password)) {
             JOptionPane.showMessageDialog(panel, "Login exitoso!");
             new initialMenu(username, clip, musicOn).setLocationRelativeTo(null);
+            n.updateIp();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(panel, "Usuario o contraseña incorrectos.");
