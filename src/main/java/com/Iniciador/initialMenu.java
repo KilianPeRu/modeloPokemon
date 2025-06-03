@@ -4,6 +4,7 @@
  */
 package com.Iniciador;
 
+import com.Chats.Buscador;
 import com.PokemonContainer.PokemonContainerGUI;
 import com.Recursos.reusableCode.pokemonInterface;
 import com.Recursos.CargarEquipoRival;
@@ -340,7 +341,7 @@ public class initialMenu extends javax.swing.JFrame {
 
     private void buttonChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChatActionPerformed
         // TODO add your handling code here:
-        weAreWorking();
+        new Buscador(user,Integer.parseInt(id));
     }//GEN-LAST:event_buttonChatActionPerformed
 
     private void buttonBattleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBattleActionPerformed

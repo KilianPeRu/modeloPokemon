@@ -14,7 +14,6 @@ public class networkManager {
     private static String url;
     private static String user;
     private static String psswd;
-    private static boolean conectado;
     private static java.sql.Connection con;
     private Socket socket;
     String ip = "localhost";
@@ -34,7 +33,6 @@ public class networkManager {
         user = "root";
         psswd = "root";
         con = DriverManager.getConnection(url, user, psswd);
-        conectado = true;
     }
     //Función que se encarga de desconectar de la base de datos
     public static void disconnect() {
@@ -43,7 +41,6 @@ public class networkManager {
         } catch (Exception e) {
             System.out.println("No se pudo cerrar la conexión con la base de datos");
         }
-        conectado = false;
     }
     //Funcion que se encarga de actualizar la información a la base de datos
     public void updateIp() throws SQLException, ClassNotFoundException {
