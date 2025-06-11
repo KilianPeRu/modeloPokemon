@@ -307,31 +307,7 @@ public class LogIn extends JFrame {
     }
     private void registrarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame("Registro");
-        JLabel userLabel = new JLabel("Usuario:");
-        JTextField userField = new JTextField();
-        JLabel passLabel = new JLabel("Contraseña");
-        JPasswordField passField = new JPasswordField();
-        JButton registerButton = new JButton("Registrar");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (registerUser(userField.getText(), passField.getText())) {
-                    JOptionPane.showMessageDialog(panel, "Registro exitoso!");
-                } else {
-                    JOptionPane.showMessageDialog(panel, "El usuario ya existe.");
-                }
-            }
-        });
-        frame.add(userLabel);
-        frame.add(userField);
-        frame.add(passLabel);
-        frame.add(passField);
-        frame.add(registerButton);
-        frame.setSize(300, 200);
-        frame.setLayout(new GridLayout(3, 2));
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        new Register().setVisible(true);
     }//GEN-LAST:event_registrarActionPerformed
     public Clip musica(String rutaArchivo) {
         Clip clip = null;

@@ -34,6 +34,7 @@ public class Buscador extends javax.swing.JFrame {
         inicio();
         setVisible(true);
         addKeyListeners();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public void inicio() {
@@ -94,6 +95,10 @@ public class Buscador extends javax.swing.JFrame {
             this.dispose();
         } catch (SQLException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Jugador no encontrado o UUID incorrecta");
+        }catch (NumberFormatException x){
+
+            JOptionPane.showMessageDialog(this, "Ingrese un numero válido FORMATO NUMEROS");
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     public void addKeyListeners() {

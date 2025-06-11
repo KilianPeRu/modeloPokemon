@@ -1,5 +1,6 @@
 package com.Chats;
 
+import javax.swing.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +37,12 @@ public class Cliente implements Runnable {
             sc.close();
 
         } catch (IOException ex) {
-            System.out.println("El usuario no esta en el chat");
+            String[] aux = mensaje.split(":");
+            if (!aux[0].equals("Sistema ")) {
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Error");
+                JOptionPane.showMessageDialog(dialog, "Usuario desconectado");
+            }
         }
 
     }

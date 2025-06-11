@@ -51,6 +51,7 @@ public class initialMenu extends javax.swing.JFrame {
         initComponents();
         iniciar();
         initializeGUI();
+        setResizable(false);
         setVisible(true);
     }
 

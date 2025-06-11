@@ -1,9 +1,11 @@
 package com.Chats;
 
+import com.PokemonContainer.PokemonContainerGUI;
+
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;
@@ -31,8 +33,20 @@ public class Chat extends javax.swing.JFrame implements Observer {
         Thread t = new Thread(server);
         t.start();
         addKeyListeners();
+        setResizable(false);
         setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                String msg = "Sistema : El usuario" + username + " se ha desconectado";
+                Cliente c = new Cliente(friendPort, msg);
+                Thread t = new Thread(c);
+                t.start();
+            }
+        });
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,7 +58,7 @@ public class Chat extends javax.swing.JFrame implements Observer {
         txtTextoEnviar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("FRM1");
+        setTitle(username + " - " + friendName);
 
         txtTexto.setColumns(20);
         txtTexto.setRows(5);
@@ -88,14 +102,16 @@ public class Chat extends javax.swing.JFrame implements Observer {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {
         String mensaje = username + ": " + this.txtTextoEnviar.getText() + "\n";
-        this.txtTexto.append(mensaje);
+        if(!txtTextoEnviar.getText().trim().equals("")) {
+            // Enviar al puerto del amigo
+            Cliente c = new Cliente(friendPort, mensaje);
+            Thread t = new Thread(c);
+            t.start();
 
-        // Enviar al puerto del amigo
-        Cliente c = new Cliente(friendPort, mensaje);
-        Thread t = new Thread(c);
-        t.start();
+            this.txtTextoEnviar.setText(""); // Limpiar campo de texto
+            this.txtTexto.append(mensaje);
+        }
 
-        this.txtTextoEnviar.setText(""); // Limpiar campo de texto
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,7 +141,7 @@ public class Chat extends javax.swing.JFrame implements Observer {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    btnEnviarActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "EnterKeyPressed"));
+                   // btnEnviarActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "EnterKeyPressed"));
                 }
             }
 
