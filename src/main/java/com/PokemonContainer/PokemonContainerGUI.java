@@ -92,9 +92,9 @@ public class PokemonContainerGUI extends javax.swing.JFrame {
         titleLabel.setOpaque(true);
 
         userName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userName.setText("name");
+        userName.setText(username);
 
-        userID.setText("uuid");
+        userID.setText(id);
         userID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userIDActionPerformed(evt);

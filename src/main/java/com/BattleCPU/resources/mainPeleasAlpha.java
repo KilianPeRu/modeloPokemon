@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 
 public class mainPeleasAlpha {
+
     String id;
     // Iniciando variables necesarias para la aplicacion
     CargarEquipoRival crCPU = new CargarEquipoRival(); // Recurso de carga para equipo de la CPU
@@ -211,6 +212,10 @@ public class mainPeleasAlpha {
 
                 if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
                     try {
+                        int dinero = (int) (Math.random()*100 + 50);
+                        MoneyManager m = new MoneyManager(dinero,id);
+                        m.updateMoney();
+                        JOptionPane.showMessageDialog(null, "Has conseguido " + dinero + " Pokedolares");
                         new initialMenu(username,musica,false, id);
                         frame.dispose();
                     } catch (SQLException e) {
@@ -244,6 +249,10 @@ public class mainPeleasAlpha {
 
                 if (option == JOptionPane.OK_OPTION || option == JOptionPane.CLOSED_OPTION) {
                     try {
+                        int dinero = (int) (Math.random()*50 + 15);
+                        MoneyManager m = new MoneyManager(dinero,id);
+                        m.updateMoney();
+                        JOptionPane.showMessageDialog(null, "Has conseguido " + dinero + " Pokedolares");
                         new initialMenu(username,musica,false, id);
                         frame.dispose();
                     } catch (SQLException e) {

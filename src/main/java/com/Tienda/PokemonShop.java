@@ -239,13 +239,13 @@ public class PokemonShop extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        new pokeComparator(username,PCPokemon.get(indice), teamUser, id);
-                        dispose();
+                        new ManagerPokemons(teamUser,username,PCPokemon.get(indice), id);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     } catch (ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
                     }
+                    dispose();
                 }
             });
             panel.add(bttn);

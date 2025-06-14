@@ -58,6 +58,7 @@ public class pokeComparator extends javax.swing.JFrame {
                 }
             }
         });
+
     }
 
     /**
@@ -158,11 +159,56 @@ public class pokeComparator extends javax.swing.JFrame {
             }
         });
 
-        JButton bttnRelease = new JButton("Liberar Pokemon");
+        JButton bttnRelease = new JButton("Dejar Pokemon");
         bttnRelease.setBackground(new Color(255, 111, 111));
         bttnRelease.setBorder(new RoundBorder(9));
+        bttnRelease.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    loader.deleteManager(pokeComp);
+
+                    pokeList.clear();
+                    pokeList = c.cargarEquipo(username);
+
+                    new PokemonContainerGUI(pokeList, username, id).setVisible(true);
+                    dispose();
+
+                } catch (SQLException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (LineUnavailableException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         panel.add(bttnCambiar);
         panel.add(bttnRelease);
+
+        JButton bttnAdd = new JButton("Añadir Pokémon");
+        bttnAdd.setBackground(new Color(255, 248, 111));
+        bttnAdd.setBorder(new RoundBorder(9));
+        bttnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if(pokeList.size() < 6){
+                    loader.addManager(pokeCaja);
+
+                    pokeList.clear();
+                    pokeList = c.cargarEquipo(username);
+                    new PokemonContainerGUI(pokeList, username, id).setVisible(true);
+                    dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Tu equipo solo puede tener 6 Pokemon.");
+                    }
+
+                } catch (SQLException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (LineUnavailableException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        panel.add(bttnAdd);
+
         return panel;
     }
     public JPanel generatePokemon(Pokemon p){
