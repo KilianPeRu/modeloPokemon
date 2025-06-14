@@ -48,6 +48,8 @@ public class PokemonShop extends JFrame {
         initComponents();
         iniciar();
         setLocationRelativeTo(null);
+        userName.setText(username);
+        userID.setText(id);
         //setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
