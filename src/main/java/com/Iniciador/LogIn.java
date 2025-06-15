@@ -66,9 +66,9 @@ public class LogIn extends JFrame {
         sound = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("frame");
+        setTitle("Bienvenido a Javamon!");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setName("frame"); // NOI18N
+        setName("Bienvenido a Javamon!"); // NOI18N
 
         panel.setBackground(new java.awt.Color(0, 0, 255));
         panel.setName(""); // NOI18N

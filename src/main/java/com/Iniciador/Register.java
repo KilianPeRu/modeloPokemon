@@ -30,6 +30,7 @@ public class Register extends JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
