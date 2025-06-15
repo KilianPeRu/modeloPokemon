@@ -42,6 +42,7 @@ public class LogIn extends JFrame {
         setofGUI();
         addKeyListeners();
         setVisible(true);
+
     }
 
     /**

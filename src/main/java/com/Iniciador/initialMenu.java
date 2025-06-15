@@ -387,7 +387,9 @@ public class initialMenu extends javax.swing.JFrame {
         Icon iconsettings = getIcono("src/main/java/com/Recursos/utils/engranaje.png");
         Icon iconCPU = getIcono("src/main/java/com/Recursos/utils/logoCPU.png");
         Icon iconBattle = getIcono("src/main/java/com/Recursos/utils/onlineBattle.png");
-
+        Icon iconChat = getIcono("src/main/java/com/Recursos/utils/chat.jpg");
+        Icon iconPC = getIcono("src/main/java/com/Recursos/utils/pc.jpg");
+        Icon iconTienda = getIcono("src/main/java/com/Recursos/utils/tienda.jpg");
         //Imagen del boton de settings
         settings.setIcon(getIcono("src/main/java/com/Recursos/utils/engranaje.png",settings.getWidth(),settings.getHeight()));
         settings.setBorderPainted(false);
@@ -403,6 +405,18 @@ public class initialMenu extends javax.swing.JFrame {
         buttonBattle.setIcon(getIcono("src/main/java/com/Recursos/utils/onlineBattle.png",buttonBattle.getWidth(),buttonBattle.getHeight()));
         buttonBattle.setBorder(new LineBorder(Color.BLACK,2));
         buttonBattle.addMouseListener(hoverManager(buttonBattle, iconBattle));
+        //Imagen del boton del chat
+        buttonChat.setIcon(getIcono("src/main/java/com/Recursos/utils/chat.jpg",buttonChat.getWidth(),buttonChat.getHeight()));
+        buttonChat.setBorder(new LineBorder(Color.BLACK,2));
+        buttonChat.addMouseListener(hoverManager(buttonChat, iconChat));
+        //Imagen del boton del PC
+        buttonPC.setIcon(getIcono("src/main/java/com/Recursos/utils/pc.jpg",buttonPC.getWidth(),buttonPC.getHeight()));
+        buttonPC.setBorder(new LineBorder(Color.BLACK,2));
+        buttonPC.addMouseListener(hoverManager(buttonPC, iconPC));
+        //Imagen del boton de la tienda
+        buttonShop.setIcon(getIcono("src/main/java/com/Recursos/utils/tienda.jpg",buttonShop.getWidth(),buttonShop.getHeight()));
+        buttonShop.setBorder(new LineBorder(Color.BLACK,2));
+        buttonShop.addMouseListener(hoverManager(buttonShop, iconTienda));
 
     }
     public MouseAdapter hoverManager(JButton button, Icon icon){
